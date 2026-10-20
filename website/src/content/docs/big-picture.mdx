@@ -1,0 +1,67 @@
+---
+title: The big picture
+description: How the six dunky skills click together, from a request to a PR.
+---
+
+import { Steps } from '@astrojs/starlight/components'
+import Engine from '../../components/engine.astro'
+
+Six skills, two shared files, one line from a request to a PR. Click any
+skill to read its page.
+
+<Engine />
+
+## How a task moves
+
+<Steps>
+
+1. **You ask.** In plain words: "I need a scout", "deploy a dev", "brawl
+   this". Every skill answers to its own phrases.
+
+2. **Scout maps.** It reads the repo's own docs and code and writes
+   `.dunky/scout.md`: the boundaries, the intent behind the code, the files
+   that matter, and a queue of the tasks you asked for.
+
+3. **Devs build.** Scout deploys a dev on every ready task and never
+   waits. One task runs in your checkout; several run in parallel, one git
+   worktree each, after Scout asks you once. A dev specs, tests, implements, and proves the
+   change by running it, by the principles and workflow in `standards/`.
+
+4. **Brawl, when you ask.** Devs never stop to review. On the changes
+   where the stakes are worth it, you ask for a brawl: the review before the PR opens,
+   with the lenses a team of reviewers would bring. Each finding gets its own
+   red-vs-blue fight, and only what survives comes back.
+
+5. **The PR opens**, with the fights already settled when you asked for them.
+
+</Steps>
+
+Anyone stuck, at any step, calls **rubber-duck** to think a hard thought
+through, or **spike** to answer a question by trying.
+
+## The dunky way
+
+- **The repo wins.** A rule in `AGENTS.md`, `ARCHITECTURE.md`, or a
+  `SPEC.md` beats any standard. No skill overrides a decision the repo made.
+- **Map before you build.** Every dev reads the map. Scout draws it first,
+  then runs ahead and never waits.
+- **The map informs, never authorizes.** A note is a hint to check, not an
+  order. Scout queues only what you asked for.
+- **Settle facts, ask decisions.** A question that reading or running can
+  answer is never a question for a human. A decision only you can make
+  parks one task, and the rest keep going.
+- **Green is not safe.** Passing tests prove the tests. Every change is
+  proven by running it.
+- **One finding, one fight.** A review comment either survives a defender
+  or falls. The fight happens before the PR, not in it.
+- **No ceremony.** Say what you want in plain words. Every skill answers to
+  a phrase.
+
+## Who is on duty
+
+| State                 | On duty                                     |
+| --------------------- | ------------------------------------------- |
+| EXPLORE               | Scout maps, then deploys a dev per task     |
+| SPEC, TEST, IMPLEMENT | Dev, one task at a time                     |
+| RECONCILE             | Dev runs the checks and proves the change   |
+| Before the PR         | Brawl when you ask, red-vs-blue per finding |

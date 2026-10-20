@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dunky skills · research and design brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · pre-emit critique: P5 H4 E4 S5 R4 V4 */
+/* Hallmark · genre: modern-minimal · macrostructure: Docs-home / brief · theme: Cobalt (Dunky violet accent, shared with spike-results) · nav: bordered bar · footer: minimal */
+:root {
+  --color-paper: oklch(98.5% 0.004 250);
+  --color-paper-2: oklch(96.4% 0.006 252);
+  --color-paper-glass: oklch(98.5% 0.004 250 / 0.88);
+  --color-ink: oklch(24% 0.02 258);
+  --color-ink-2: oklch(34% 0.018 257);
+  --color-muted: oklch(49% 0.016 257);
+  --color-rule: oklch(91% 0.008 255);
+  --color-rule-2: oklch(84% 0.01 255);
+  --color-accent: oklch(55% 0.21 284);
+  --color-accent-soft: oklch(95.5% 0.025 284);
+  --color-accent-ink: oklch(98.5% 0.004 250);
+  --color-red: oklch(56% 0.19 25);
+  --color-red-soft: oklch(95% 0.03 25);
+  --color-blue: oklch(56% 0.17 245);
+  --color-blue-soft: oklch(95% 0.03 245);
+  --color-ok: oklch(56% 0.13 155);
+  --color-warn: oklch(66% 0.15 75);
+  --color-graphite: oklch(22% 0.016 260);
+  --color-graphite-ink: oklch(92% 0.006 255);
+  --color-graphite-muted: oklch(70% 0.012 256);
+  --color-focus: var(--color-accent);
+
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: clamp(1.75rem, 2vw + 1rem, 2.5rem);
+  --text-display: clamp(2rem, 3.6vw + 1rem, 3.5rem);
+
+  --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px;
+  --space-xl: 32px; --space-2xl: 48px; --space-3xl: 64px; --space-4xl: 96px;
+  --radius-xs: 4px; --radius-sm: 6px; --radius-md: 10px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-short: 150ms; --dur-med: 250ms;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-paper: oklch(17% 0.012 258);
+    --color-paper-2: oklch(21% 0.014 258);
+    --color-paper-glass: oklch(17% 0.012 258 / 0.88);
+    --color-ink: oklch(93% 0.006 255);
+    --color-ink-2: oklch(84% 0.008 255);
+    --color-muted: oklch(66% 0.012 256);
+    --color-rule: oklch(28% 0.012 258);
+    --color-rule-2: oklch(36% 0.014 258);
+    --color-accent: oklch(72% 0.17 284);
+    --color-accent-soft: oklch(26% 0.05 284);
+    --color-accent-ink: oklch(17% 0.012 258);
+    --color-red: oklch(70% 0.17 25);
+    --color-red-soft: oklch(26% 0.05 25);
+    --color-blue: oklch(72% 0.14 245);
+    --color-blue-soft: oklch(26% 0.05 245);
+    --color-ok: oklch(72% 0.13 155);
+    --color-warn: oklch(78% 0.14 75);
+    --color-graphite: oklch(12% 0.012 260);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--color-paper); color: var(--color-ink);
+  font-family: var(--font-body); font-size: var(--text-base); line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--color-accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: var(--radius-xs); }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--color-paper); padding: 8px 12px; border: 1px solid var(--color-rule-2); }
+.skip:focus { left: 12px; z-index: 50; }
+
+h1, h2, h3, h4 { font-family: var(--font-display); font-style: normal; letter-spacing: -0.01em; line-height: 1.15; margin: 0; overflow-wrap: anywhere; min-width: 0; }
+h1 { font-size: var(--text-display); font-weight: 600; }
+h2 { font-size: var(--text-3xl); font-weight: 600; }
+h3 { font-size: var(--text-xl); font-weight: 600; }
+h4 { font-size: var(--text-lg); font-weight: 600; }
+p { margin: 0 0 var(--space-md); color: var(--color-ink-2); max-width: 68ch; }
+ul, ol { margin: 0 0 var(--space-md); padding-left: 1.25rem; color: var(--color-ink-2); max-width: 70ch; }
+li { margin: var(--space-2xs) 0; }
+li::marker { color: var(--color-muted); }
+strong { color: var(--color-ink); font-weight: 600; }
+code, kbd { font-family: var(--font-mono); font-size: 0.86em; background: var(--color-paper-2); border: 1px solid var(--color-rule); padding: 0.05em 0.35em; border-radius: var(--radius-xs); }
+pre { font-family: var(--font-mono); font-size: var(--text-sm); line-height: 1.5; background: var(--color-graphite); color: var(--color-graphite-ink); padding: var(--space-md) var(--space-lg); border-radius: var(--radius-md); overflow-x: auto; margin: 0 0 var(--space-md); }
+pre code { background: none; border: 0; padding: 0; color: inherit; font-size: inherit; }
+pre .c { color: var(--color-graphite-muted); }
+pre .k { color: oklch(78% 0.14 284); }
+.eyebrow { font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-muted); }
+.eyebrow.accent { color: var(--color-accent); }
+.muted { color: var(--color-muted); }
+.small { font-size: var(--text-sm); }
+
+/* nav */
+.nav { position: sticky; top: 0; z-index: 30; background: var(--color-paper-glass); backdrop-filter: blur(8px); border-bottom: 1px solid var(--color-rule); }
+.nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 var(--space-lg); height: 56px; display: flex; align-items: center; gap: var(--space-lg); }
+.wordmark { font-family: var(--font-display); font-weight: 600; font-size: var(--text-base); color: var(--color-ink); white-space: nowrap; }
+.wordmark span { color: var(--color-accent); }
+.nav-links { display: flex; gap: var(--space-md); overflow-x: auto; scrollbar-width: none; flex: 1; }
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-links a { font-size: var(--text-sm); color: var(--color-ink-2); white-space: nowrap; padding: 6px 2px; border-bottom: 2px solid transparent; }
+.nav-links a:hover { text-decoration: none; color: var(--color-ink); }
+.nav-links a.is-active { color: var(--color-ink); border-bottom-color: var(--color-accent); }
+
+/* layout */
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 var(--space-lg); }
+section { padding: var(--space-3xl) 0; border-top: 1px solid var(--color-rule); }
+section.hero { border-top: 0; padding: var(--space-3xl) 0 var(--space-2xl); }
+.sec-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--space-xl); margin-bottom: var(--space-xl); }
+.sec-head p { margin-top: var(--space-xs); }
+@media (max-width: 768px) { .sec-head { grid-template-columns: minmax(0, 1fr); gap: var(--space-sm); } }
+
+.hero-grid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--space-2xl); align-items: start; }
+@media (max-width: 768px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
+.hero h1 { margin: var(--space-sm) 0 var(--space-md); }
+.lede { font-size: var(--text-lg); color: var(--color-ink-2); }
+.hero-side { border-left: 1px solid var(--color-rule-2); padding-left: var(--space-lg); }
+.hero-side dl { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-xs) var(--space-md); font-size: var(--text-sm); }
+.hero-side dt { color: var(--color-muted); font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: 0.06em; padding-top: 3px; }
+.hero-side dd { margin: 0; color: var(--color-ink-2); }
+
+/* rows / tables */
+.rows { border-top: 1px solid var(--color-rule); }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--space-md) var(--space-xl); padding: var(--space-md) 0; border-bottom: 1px solid var(--color-rule); }
+.row > :first-child h4 { font-size: var(--text-base); }
+.row p:last-child, .row ul:last-child { margin-bottom: 0; }
+@media (max-width: 768px) { .row { grid-template-columns: minmax(0, 1fr); gap: var(--space-xs); } }
+table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); margin: 0 0 var(--space-md); }
+th, td { text-align: left; vertical-align: top; padding: var(--space-xs) var(--space-sm); border-bottom: 1px solid var(--color-rule); color: var(--color-ink-2); }
+th { font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-muted); font-weight: 500; }
+td:first-child { color: var(--color-ink); font-weight: 500; }
+.table-scroll { overflow-x: auto; }
+
+/* chips / tabs */
+.chips { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-bottom: var(--space-lg); }
+.chip { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.02em; padding: 5px 10px; border: 1px solid var(--color-rule-2); border-radius: 999px; background: transparent; color: var(--color-ink-2); cursor: pointer; transition: border-color var(--dur-short), background-color var(--dur-short), color var(--dur-short); }
+.chip:hover { border-color: var(--color-accent); }
+.chip:active { background: var(--color-paper-2); }
+.chip[aria-pressed="true"] { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-accent-ink); }
+.chip:disabled { opacity: .5; cursor: not-allowed; }
+.tag { display: inline-block; font-family: var(--font-mono); font-size: var(--text-2xs); letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 7px; border: 1px solid var(--color-rule-2); border-radius: var(--radius-xs); color: var(--color-muted); margin-right: 4px; white-space: nowrap; }
+.tag.red { color: var(--color-red); border-color: var(--color-red); }
+.tag.blue { color: var(--color-blue); border-color: var(--color-blue); }
+.tag.accent { color: var(--color-accent); border-color: var(--color-accent); }
+.tag.ok { color: var(--color-ok); border-color: var(--color-ok); }
+.tag.warn { color: var(--color-warn); border-color: var(--color-warn); }
+
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--color-rule); margin-bottom: var(--space-lg); overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { font-family: var(--font-body); font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); background: none; border: 0; border-bottom: 2px solid transparent; padding: 10px 14px; margin-bottom: -1px; cursor: pointer; white-space: nowrap; transition: color var(--dur-short), border-color var(--dur-short); }
+.tab:hover { color: var(--color-ink); }
+.tab:active { color: var(--color-ink-2); }
+.tab[aria-selected="true"] { color: var(--color-ink); border-bottom-color: var(--color-accent); }
+[role="tabpanel"][hidden] { display: none; }
+
+/* cards (flat, hairline) */
+.grid { display: grid; gap: var(--space-md); grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.card { border: 1px solid var(--color-rule); border-radius: var(--radius-md); padding: var(--space-md) var(--space-lg); background: var(--color-paper); min-width: 0; transition: border-color var(--dur-short); }
+.card:hover { border-color: var(--color-rule-2); }
+.card h4 { font-size: var(--text-base); margin-bottom: var(--space-2xs); }
+.card p { font-size: var(--text-sm); margin-bottom: var(--space-xs); }
+.card .meta { font-family: var(--font-mono); font-size: var(--text-2xs); color: var(--color-muted); letter-spacing: 0.03em; }
+.card.is-hidden { display: none; }
+
+details { border: 1px solid var(--color-rule); border-radius: var(--radius-md); padding: 0 var(--space-lg); margin: 0 0 var(--space-sm); background: var(--color-paper); }
+summary { cursor: pointer; font-weight: 500; padding: var(--space-sm) 0; color: var(--color-ink); list-style: none; display: flex; justify-content: space-between; gap: var(--space-md); align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: '+'; font-family: var(--font-mono); color: var(--color-muted); }
+details[open] summary::after { content: '-'; }
+details[open] summary { border-bottom: 1px solid var(--color-rule); margin-bottom: var(--space-sm); }
+details > :last-child { margin-bottom: var(--space-md); }
+
+blockquote { margin: 0 0 var(--space-md); padding: var(--space-xs) var(--space-md); border-left: 2px solid var(--color-accent); color: var(--color-ink-2); font-size: var(--text-sm); max-width: 68ch; }
+blockquote cite { display: block; font-style: normal; color: var(--color-muted); font-family: var(--font-mono); font-size: var(--text-2xs); margin-top: 4px; }
+
+/* verdict band (the one dark beat) */
+.band { background: var(--color-graphite); color: var(--color-graphite-ink); border-top: 0; }
+.band h2, .band h3, .band h4, .band strong { color: var(--color-graphite-ink); }
+.band p, .band li { color: var(--color-graphite-muted); }
+.band .eyebrow { color: var(--color-graphite-muted); }
+.band .eyebrow.accent { color: oklch(78% 0.14 284); }
+.band .step { border-color: oklch(32% 0.016 260); }
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-md); counter-reset: step; }
+@media (max-width: 768px) { .steps { grid-template-columns: minmax(0, 1fr); } }
+.step { border: 1px solid var(--color-rule); border-radius: var(--radius-md); padding: var(--space-md) var(--space-lg); min-width: 0; }
+.step::before { counter-increment: step; content: counter(step, decimal-leading-zero); font-family: var(--font-mono); font-size: var(--text-2xs); color: var(--color-accent); letter-spacing: .06em; display: block; margin-bottom: var(--space-xs); }
+.band .step::before { color: oklch(78% 0.14 284); }
+.step h4 { margin-bottom: var(--space-xs); }
+.step p, .step li { font-size: var(--text-sm); }
+.step ul { padding-left: 1rem; margin-bottom: 0; }
+
+/* state machine SVG */
+.sm-wrap { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--space-xl); align-items: start; }
+@media (max-width: 768px) { .sm-wrap { grid-template-columns: minmax(0, 1fr); } }
+.sm svg { width: 100%; height: auto; display: block; font-family: var(--font-mono); }
+.sm .state rect { fill: var(--color-paper); stroke: var(--color-rule-2); stroke-width: 1.2; cursor: pointer; transition: stroke var(--dur-short), fill var(--dur-short); }
+.sm .state text { fill: var(--color-ink); font-size: 13px; font-weight: 600; pointer-events: none; }
+.sm .state .sub { fill: var(--color-muted); font-size: 10px; font-weight: 400; }
+.sm .state:hover rect, .sm .state.is-on rect { stroke: var(--color-accent); fill: var(--color-accent-soft); }
+.sm .edge { stroke: var(--color-rule-2); stroke-width: 1.4; fill: none; marker-end: url(#arrow); }
+.sm .edge-label { fill: var(--color-muted); font-size: 10px; }
+.sm .agent { font-size: 10px; fill: var(--color-ink-2); }
+.sm .agent.red { fill: var(--color-red); }
+.sm .agent.blue { fill: var(--color-blue); }
+.sm .agent.accent { fill: var(--color-accent); }
+.sm-note { border: 1px solid var(--color-rule); border-radius: var(--radius-md); padding: var(--space-md) var(--space-lg); min-height: 160px; }
+.sm-note h4 { margin-bottom: var(--space-xs); }
+.sm-note p, .sm-note li { font-size: var(--text-sm); }
+
+/* tower defense */
+.td { border: 1px solid var(--color-rule); border-radius: var(--radius-md); padding: var(--space-lg); }
+.td-controls { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-bottom: var(--space-lg); }
+.lane { display: grid; grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr) 72px minmax(0, 1fr); gap: var(--space-sm); align-items: stretch; }
+@media (max-width: 768px) { .lane { grid-template-columns: minmax(0, 1fr); } .lane .arrow { display: none; } }
+.col { min-width: 0; }
+.col-head { font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: var(--space-xs); }
+.col-head.red { color: var(--color-red); }
+.col-head.blue { color: var(--color-blue); }
+.unit { border: 1px solid var(--color-rule-2); border-radius: var(--radius-sm); padding: var(--space-xs) var(--space-sm); font-size: var(--text-sm); margin-bottom: var(--space-xs); background: var(--color-paper); min-width: 0; }
+.unit .u-name { font-weight: 600; color: var(--color-ink); display: block; }
+.unit .u-sub { color: var(--color-muted); font-size: var(--text-xs); }
+.unit.red { border-color: var(--color-red); background: var(--color-red-soft); }
+.unit.blue { border-color: var(--color-blue); background: var(--color-blue-soft); }
+.unit.gate { border-color: var(--color-accent); background: var(--color-accent-soft); }
+.arrow { display: flex; align-items: center; justify-content: center; color: var(--color-muted); font-family: var(--font-mono); font-size: var(--text-xs); text-align: center; line-height: 1.3; }
+.td-verdict { margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--color-rule); font-size: var(--text-sm); color: var(--color-ink-2); }
+.td-verdict strong { color: var(--color-ink); }
+.empty { color: var(--color-muted); font-size: var(--text-sm); font-style: normal; padding: var(--space-xs) 0; }
+
+/* names */
+.names { display: grid; gap: var(--space-xs); grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+.name { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-sm); align-items: start; border: 1px solid var(--color-rule); border-radius: var(--radius-sm); padding: var(--space-xs) var(--space-sm); min-width: 0; }
+.name.is-top { border-color: var(--color-accent); }
+.name .star { appearance: none; width: 26px; height: 26px; border: 1px solid var(--color-rule-2); border-radius: var(--radius-xs); background: var(--color-paper); cursor: pointer; font-size: 14px; line-height: 1; color: var(--color-muted); transition: border-color var(--dur-short), color var(--dur-short); margin-top: 2px; }
+.name .star:hover { border-color: var(--color-accent); }
+.name .star:active { background: var(--color-paper-2); }
+.name .star[aria-pressed="true"] { color: var(--color-accent); border-color: var(--color-accent); }
+.name b { font-family: var(--font-display); font-weight: 600; color: var(--color-ink); display: block; font-size: var(--text-base); }
+.name .cli { font-family: var(--font-mono); font-size: var(--text-2xs); color: var(--color-muted); }
+.name p { font-size: var(--text-xs); margin: 2px 0 0; }
+.picked { margin-top: var(--space-md); font-size: var(--text-sm); color: var(--color-ink-2); }
+
+/* lens catalogue */
+.lens-grid { display: grid; gap: var(--space-xs); grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.lens { border: 1px solid var(--color-rule); border-radius: var(--radius-sm); padding: var(--space-xs) var(--space-sm); font-size: var(--text-sm); min-width: 0; }
+.lens.is-hidden { display: none; }
+.lens b { color: var(--color-ink); display: block; }
+.lens .src { color: var(--color-muted); font-size: var(--text-xs); }
+
+/* decisions */
+.decisions { list-style: none; padding: 0; max-width: none; }
+.decisions li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-sm); align-items: start; padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-rule); margin: 0; }
+.decisions input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--color-accent); cursor: pointer; }
+.decisions label { cursor: pointer; color: var(--color-ink); font-weight: 500; }
+.decisions .d-body { font-size: var(--text-sm); color: var(--color-ink-2); margin-top: 2px; }
+.progress { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); margin-bottom: var(--space-sm); }
+
+.tree { font-family: var(--font-mono); font-size: var(--text-sm); line-height: 1.55; }
+footer { padding: var(--space-xl) 0 var(--space-3xl); border-top: 1px solid var(--color-rule); font-size: var(--text-sm); color: var(--color-muted); }
+
+.reveal { opacity: 0; transform: translateY(8px); transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out); }
+.reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  * { transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Sections">
+  <div class="nav-inner">
+    <span class="wordmark">dunky<span>/</span>skills</span>
+    <div class="nav-links" id="navlinks">
+      <a href="#verdict">Verdict</a>
+      <a href="#landscape">Landscape</a>
+      <a href="#pocock">Pocock</a>
+      <a href="#poteto">poteto</a>
+      <a href="#scout">Scout</a>
+      <a href="#oracle">Oracle</a>
+      <a href="#redblue">Red / Blue</a>
+      <a href="#flow">Flow</a>
+      <a href="#repo">Repo</a>
+      <a href="#decisions">Decisions</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow accent">Research brief · 2026-10-15</span>
+      <h1>Three agents, one spec-driven loop.</h1>
+      <p class="lede">What the best public skill sets do, where they break, and how Scout, the Oracle, and Red / Blue fit the <code>SPEC -> TEST -> IMPLEMENT -> RECONCILE</code> state machine in every dunky repo.</p>
+      <p class="small muted">Sources: raw <code>SKILL.md</code> files, issue trackers, and author posts fetched on 2026-10-15. Star counts are as shown on GitHub that day. Nothing here is a measurement of our own.</p>
+    </div>
+    <aside class="hero-side" aria-label="At a glance">
+      <dl>
+        <dt>Scout</dt><dd>Fork of Pocock's <strong>wayfinder</strong>. Charts fog into decision tickets. Never builds.</dd>
+        <dt>Oracle</dt><dd>Fork of Pocock's <strong>grilling</strong>. Asks the frontier in rounds. Sits with you in every phase.</dd>
+        <dt>Red / Blue</dt><dd>Tower defense at <strong>RECONCILE</strong>. Red attacks through a power. Blue must refute or reproduce. A gate scores survivors.</dd>
+        <dt>Powers</dt><dd>Pluggable lenses as <code>references/&lt;power&gt;.md</code>. Nobody ships this abstraction yet.</dd>
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<section id="verdict" class="band">
+  <div class="wrap">
+    <span class="eyebrow accent">Verdict</span>
+    <h2 style="margin:8px 0 24px">Copy Pocock's shapes. Borrow poteto's verification discipline. Build the plug yourself.</h2>
+    <div class="steps">
+      <div class="step">
+        <h4>Keep from Pocock</h4>
+        <ul>
+          <li>One-line user-invoked wrappers over model-invoked primitives.</li>
+          <li>Frontier rounds with a recommended answer per question.</li>
+          <li>Decision tickets on the tracker, not in context.</li>
+          <li>The no-op test: delete any line the model already obeys.</li>
+        </ul>
+      </div>
+      <div class="step">
+        <h4>Keep from poteto</h4>
+        <ul>
+          <li>"Green is not safe." The agent that judges never wrote the change.</li>
+          <li>Lead judgment sorts findings into Act on / Consider / Dismissed.</li>
+          <li>Fix repeated mistakes at the highest level: code &gt; lint &gt; skill text.</li>
+          <li>Every skill ends with a <strong>Reply:</strong> contract.</li>
+        </ul>
+      </div>
+      <div class="step">
+        <h4>Avoid</h4>
+        <ul>
+          <li>Adversarial review of abstract plans. Both authors report hallucinated risk.</li>
+          <li>Self-authorizing notes in the Scout map (wayfinder issue #683).</li>
+          <li>Descriptions that summarize the workflow. The model acts on the summary and skips the body.</li>
+          <li>Persona-only diversity. Pair it with mandate or model diversity.</li>
+        </ul>
+      </div>
+      <div class="step">
+        <h4>Build new</h4>
+        <ul>
+          <li>The <strong>power</strong> plug: one routing table, one file per lens.</li>
+          <li>Two dunky-only powers: spec fidelity against <code>SPEC.md</code>, and twin parity (TS vs Rust).</li>
+          <li>Skills follow the same loop: SPEC.md, eval scenarios, SKILL.md, skill-doctor.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="landscape">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">01 · Landscape</span><h2>Who matters</h2></div>
+      <p>Ten repos carry the field. Filter by what they are good at. The registry at skills.sh shows Pocock owning process skills and Vercel owning framework rules. No adversarial-review skill sits in the top 280 installs.</p>
+    </div>
+    <div class="chips" role="group" aria-label="Filter repositories">
+      <button class="chip" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" data-filter="process" aria-pressed="false">Process</button>
+      <button class="chip" data-filter="spec" aria-pressed="false">Spec-driven</button>
+      <button class="chip" data-filter="review" aria-pressed="false">Review</button>
+      <button class="chip" data-filter="rules" aria-pressed="false">Rule packs</button>
+      <button class="chip" data-filter="verify" aria-pressed="false">Verification</button>
+    </div>
+    <div class="grid" id="repos">
+      <article class="card" data-tags="process spec review">
+        <span class="meta">mattpocock/skills · ~292k</span>
+        <h4><a href="https://github.com/mattpocock/skills">Matt Pocock</a></h4>
+        <p>Small composable skills. grill-me, wayfinder, to-spec, to-tickets, tdd, code-review. Curated: new skills closed.</p>
+        <p class="meta">SKILL.md + sibling docs · few scripts · subagents for review and research</p>
+      </article>
+      <article class="card" data-tags="process verify review">
+        <span class="meta">cursor/plugins/pstack · poteto</span>
+        <h4><a href="https://github.com/cursor/plugins/tree/main/pstack">poteto (Lauren Tan)</a></h4>
+        <p>One fat router, 47 leaf skills, 23 playbooks, 24 principle skills. "The best spec is code." Multi-model interrogate.</p>
+        <p class="meta">SKILL.md + references + scripts + playbooks · heavy subagents</p>
+      </article>
+      <article class="card" data-tags="process spec verify">
+        <span class="meta">obra/superpowers · ~300k</span>
+        <h4><a href="https://github.com/obra/superpowers">superpowers</a></h4>
+        <p>Brainstorming HARD-GATE, writing-plans, TDD, subagent-driven development with two-stage review. Skills are tested like code.</p>
+        <p class="meta">15 skills + hooks + per-harness plugin dirs · evals</p>
+      </article>
+      <article class="card" data-tags="spec">
+        <span class="meta">anthropics/skills · ~181k</span>
+        <h4><a href="https://agentskills.io/specification">Agent Skills spec</a></h4>
+        <p>Frontmatter rules, three disclosure levels, body under 500 lines, references one level deep, <code>skills-ref validate</code>.</p>
+        <p class="meta">spec + template + validator</p>
+      </article>
+      <article class="card" data-tags="spec process">
+        <span class="meta">github/spec-kit · ~141k</span>
+        <h4><a href="https://github.com/github/spec-kit">spec-kit</a></h4>
+        <p>constitution -> specify -> plan -> tasks -> implement -> converge. <code>[NEEDS CLARIFICATION]</code> markers. Checklists are unit tests for the spec.</p>
+        <p class="meta">Python CLI + templates · owns the process</p>
+      </article>
+      <article class="card" data-tags="spec review">
+        <span class="meta">bmad-code-org/BMAD-METHOD · ~54k</span>
+        <h4><a href="https://github.com/bmad-code-org/BMAD-METHOD">BMAD</a></h4>
+        <p>Role-play agents and a Test Architect with gate verdicts PASS / CONCERNS / FAIL / WAIVED. "Default to CONCERNS when evidence is missing."</p>
+        <p class="meta">modules · heavy process</p>
+      </article>
+      <article class="card" data-tags="rules review">
+        <span class="meta">vercel-labs/agent-skills · ~32.5k</span>
+        <h4><a href="https://github.com/vercel-labs/agent-skills">Vercel rule packs</a></h4>
+        <p>web-design-guidelines reviews UI against 100+ rules in 11 categories. react-best-practices tags rules by impact.</p>
+        <p class="meta">SKILL.md + scripts + references · rules, not workflows</p>
+      </article>
+      <article class="card" data-tags="review">
+        <span class="meta">anthropics/claude-code/plugins</span>
+        <h4><a href="https://github.com/anthropics/claude-code/tree/main/plugins/code-review">Anthropic code-review</a></h4>
+        <p>Four parallel agents, then one scorer per issue rating 0 to 100. Findings under 80 are dropped. Explicit false-positive list.</p>
+        <p class="meta">the reference implementation for verified findings</p>
+      </article>
+      <article class="card" data-tags="review verify">
+        <span class="meta">wan-huiyan/agent-review-panel</span>
+        <h4><a href="https://github.com/wan-huiyan/agent-review-panel">agent-review-panel</a></h4>
+        <p>Sixteen phases: signal detection, parallel review, debate rounds, blind scoring, Opus judge. Self-reported cost $3 to $20 per run.</p>
+        <p class="meta">largest red/blue-like panel · same-model bias caveat</p>
+      </article>
+      <article class="card" data-tags="review">
+        <span class="meta">Jewgah/claude-code-skills</span>
+        <h4><a href="https://github.com/Jewgah/claude-code-skills">review-deep</a></h4>
+        <p>Four lens reviewers, then skeptic agents prompted to refute each finding. Only survivors are reported.</p>
+        <p class="meta">closest to Red / Blue with a refuter</p>
+      </article>
+      <article class="card" data-tags="review rules">
+        <span class="meta">awesome-skills/code-review-skill · ~2.1k</span>
+        <h4><a href="https://github.com/awesome-skills/code-review-skill">code-review-skill</a></h4>
+        <p>220-line core, then a routing table into <code>reference/</code> for 25 languages and 6 guides. The closest thing to a plug.</p>
+        <p class="meta">reference routing · the pattern Powers will copy</p>
+      </article>
+      <article class="card" data-tags="process">
+        <span class="meta">buildermethods/agent-os · ~5.5k</span>
+        <h4><a href="https://buildermethods.com/agent-os">Agent OS v3</a></h4>
+        <p>Discover conventions from the codebase, inject only relevant standards, shape plans against the product mission.</p>
+        <p class="meta">standards as markdown</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="pocock">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">02 · Matt Pocock</span><h2>wayfinder and grilling, in depth</h2></div>
+      <p>His skills are small, second-person, imperative. A user-invoked skill may call model-invoked skills, never another user-invoked one. Em-dashes and "be thorough" lines are banned as no-ops.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Pocock topics">
+      <button class="tab" role="tab" aria-selected="true" aria-controls="p-way" id="t-way">wayfinder</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-gaps" id="t-gaps">Gaps and gotchas</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-grill" id="t-grill">grilling</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-shape" id="t-shape">Shape and doctrine</button>
+    </div>
+
+    <div role="tabpanel" id="p-way" aria-labelledby="t-way">
+      <blockquote>"Plan, don't do. Each ticket resolves a decision, and the map is done when the way is clear, with nothing left to decide before someone goes and does the thing."<cite>wayfinder/SKILL.md</cite></blockquote>
+      <div class="rows">
+        <div class="row"><div><h4>When</h4></div><div><p>A loose idea too big for one agent session, "wrapped in fog". The split from grill-with-docs is <strong>session count, not project size</strong>. It is a situational on-ramp, not the default start.</p></div></div>
+        <div class="row"><div><h4>The Map</h4></div><div><p>One tracker issue labelled <code>wayfinder:map</code>. An index, not a store. Sections: Destination, Notes, Decisions so far, Not yet specified (the fog of war), Out of scope.</p></div></div>
+        <div class="row"><div><h4>Decision tickets</h4></div><div><p>Child issues with one <code>## Question</code>, sized to one 100K-token session. One type label each: <code>research</code> (AFK, subagent), <code>prototype</code> (HITL), <code>grilling</code> (HITL, default, also loads domain-modeling), <code>task</code> (the one type that does). Claim = assignee. Frontier = open, unblocked, unclaimed.</p></div></div>
+        <div class="row"><div><h4>Chart</h4></div><div><ol><li>Name the destination (grilling + domain-modeling).</li><li>Map the frontier, breadth-first. No fog means no map: stop and ask.</li><li>Create the map issue.</li><li>Create tickets, then wire blocking edges in a second pass with real ids.</li><li>Fire research subagents in parallel.</li><li>Stop. Charting resolves nothing.</li></ol></div></div>
+        <div class="row"><div><h4>Work</h4></div><div><p>Load the map at low resolution. Pick the user's ticket or the first on the frontier. Claim it. Resolve by type. Post a resolution comment, close, append a pointer to Decisions so far. Create newly surfaced tickets. <strong>Never resolve more than one ticket per session</strong>, except research.</p></div></div>
+        <div class="row"><div><h4>Fog vs ticket</h4></div><div><p>The test is "whether you can state the question precisely now, not whether you can answer it now."</p></div></div>
+        <div class="row"><div><h4>Hand-off</h4></div><div><p>When the map clears: <code>/to-spec #&lt;map&gt;</code>, then <code>/to-tickets</code>, then <code>/implement</code>. Wayfinder cannot call these itself because they are user-invoked.</p></div></div>
+      </div>
+    </div>
+
+    <div role="tabpanel" id="p-gaps" aria-labelledby="t-gaps" hidden>
+      <div class="rows">
+        <div class="row"><div><h4><span class="tag warn">gap</span>Self-authorized execution</h4></div><div><p>Issue <a href="https://github.com/mattpocock/skills/issues/683">#683</a>. An agent wrote "This map carries execution" into Notes. Later sessions read it as their own licence and built on a live server. Docs admit "the skill has no hard stop for 'I meant the default'."</p><p><strong>Scout fix:</strong> the Notes section cannot grant execution. Scout has no write path to code at all.</p></div></div>
+        <div class="row"><div><h4><span class="tag warn">gap</span>Sizing checked once</h4></div><div><p>Issue <a href="https://github.com/mattpocock/skills/issues/888">#888</a>. Tickets grew through appended Update blocks. One session burned over 300k tokens.</p><p><strong>Scout fix:</strong> re-size on claim. If the ticket outgrew a session, split before resolving.</p></div></div>
+        <div class="row"><div><h4><span class="tag warn">gap</span>Grilling contradiction</h4></div><div><p>Issue <a href="https://github.com/mattpocock/skills/issues/1093">#1093</a>. Grilling says "do not act until the user confirms". Wayfinder says close the ticket. Jointly unsatisfiable for weaker models.</p><p><strong>Scout fix:</strong> the Oracle ends a round with an explicit confirmation line. Scout closes only after it.</p></div></div>
+        <div class="row"><div><h4><span class="tag warn">gotcha</span>Waterfall drift</h4></div><div><p>Author: "I charted 27 tickets, and by the time I got to the thirteenth, the rest no longer made sense." Advice: bound the destination to one epic. "Wayfinder is prototypemaxxing, not planmaxxing."</p><p><strong>Scout fix:</strong> cap the first chart. Prefer prototype tickets over grilling tickets when a question is answerable by running code.</p></div></div>
+        <div class="row"><div><h4><span class="tag warn">gotcha</span>Verbosity</h4></div><div><p>"Every question is three paragraphs long. Nobody has fixed it yet." Issue #1180: ADR and ticket numbers dilute attention.</p><p><strong>Oracle fix:</strong> one sentence per question, one line per recommendation. Refer by name, never by number.</p></div></div>
+        <div class="row"><div><h4><span class="tag warn">gotcha</span>Parallel sessions re-ask</h4></div><div><p>Sessions share no context, so they repeat questions. A prototype agent once built three UI variants, chose one itself, and closed the ticket.</p><p><strong>Scout fix:</strong> HITL ticket types cannot close without a user line in the thread.</p></div></div>
+        <div class="row"><div><h4><span class="tag warn">gotcha</span>Wrong closed decision</h4></div><div><p>"No official guidance. It tends to design around the bad decision instead of challenging it."</p><p><strong>Scout fix:</strong> a <code>reopen</code> move with a new-evidence requirement, borrowed from contrarian's settled ledger.</p></div></div>
+        <div class="row"><div><h4><span class="tag">open</span>Other open issues</h4></div><div><p>#492 cannot invoke /to-spec. #599 remote changes by default. #556 skips domain-modeling. #941 research only fires at charting. #1020 throwaway branches pile up. #1282 maps hide decision context from new sessions. Local-markdown trackers are "not recommended, because material stored in the repo tends to persist by accident."</p></div></div>
+      </div>
+    </div>
+
+    <div role="tabpanel" id="p-grill" aria-labelledby="t-grill" hidden>
+      <p><code>grill-me</code> is one line: <code>Call the Skill tool with "grilling".</code> The primitive is <code>grilling</code>. <code>grill-with-docs</code> adds <code>domain-modeling</code> for a glossary and ADRs.</p>
+      <blockquote>"Map this as a design tree. The frontier is every decision whose prerequisites are already settled. Ask the whole frontier in one round: number each question and give your recommended answer. Then wait."<cite>grilling/SKILL.md</cite></blockquote>
+      <div class="rows">
+        <div class="row"><div><h4>Rounds, not one-at-a-time</h4></div><div><p>Changed in v1.1. "Same 13 questions land in ~3 rounds instead of 13." Dependent questions go to a later round. Opt-out: add "When grilling, ask one question at a time." to CLAUDE.md.</p></div></div>
+        <div class="row"><div><h4>Format</h4></div><div><pre><code>❓ <span class="k">Q1</span> - <span class="k">Tracker</span>: Where do Scout maps live?
+➡️ GitHub issues. Every dunky repo is already on GitHub and you use gh.
+---
+❓ <span class="k">Q2</span> - ...</code></pre><p>"Word each question so yes accepts your recommended answer."</p></div></div>
+        <div class="row"><div><h4>Facts vs decisions</h4></div><div><p>"Finding facts is your job, never the user's. Dispatch a sub-agent. Don't block on it. The decisions are the user's: put each to them and wait."</p></div></div>
+        <div class="row"><div><h4>Stop condition</h4></div><div><p>"The session is done when the frontier is empty. Do not act on it until the user confirms you have reached a shared understanding." Output is nothing on disk. Hand the same conversation to to-spec without clearing.</p></div></div>
+        <div class="row"><div><h4>Rejected on purpose</h4></div><div><p>No <code>AskUserQuestion</code> UI. No question caps ("Codex just asked me 200 questions" stays out of scope). "Forty-six questions across four rounds is an ordinary session."</p></div></div>
+        <div class="row"><div><h4>Known bugs</h4></div><div><p>Dependency skills not loading. Weaker models skip the confirmation gate (#975, #1068). Numbering restarts (#1154). The agent answers its own questions when run inside another skill.</p></div></div>
+      </div>
+    </div>
+
+    <div role="tabpanel" id="p-shape" aria-labelledby="t-shape" hidden>
+      <div class="rows">
+        <div class="row"><div><h4>Frontmatter</h4></div><div><p><code>name</code>, <code>description</code>, optional <code>disable-model-invocation: true</code>, rare <code>argument-hint</code>. Sibling <code>agents/openai.yaml</code> for Codex. Rule: "a skill is user-invoked in both harnesses or neither."</p></div></div>
+        <div class="row"><div><h4>Two buckets</h4></div><div><p>User-invoked: human-facing one-liner, no triggers. Model-invoked: "Use when..." with trigger phrases. Invariant: user-invoked may call model-invoked, never another user-invoked.</p></div></div>
+        <div class="row"><div><h4>Length</h4></div><div><p>One line to ~150 lines. "A 400-line skill still leaves the model verbose." Steps carry a "Done when..." completion criterion.</p></div></div>
+        <div class="row"><div><h4>Doctrine: writing-for-agents</h4></div><div><ul><li><strong>Two loads.</strong> Context load and cognitive load. The second is the price of human agency.</li><li><strong>Context pointers.</strong> The pointer's wording decides when the agent reaches the material.</li><li><strong>Leading words.</strong> Compact concepts from pretraining: tight, red, tracer bullets.</li><li><strong>No-op test.</strong> An instruction the model already obeys costs load and says nothing. Delete it.</li><li><strong>Prompt the positive.</strong> "Don't think of an elephant" fails.</li></ul></div></div>
+        <div class="row"><div><h4>Flow he teaches</h4></div><div><p>grill-with-docs -> prototype -> to-spec -> to-tickets -> implement (tdd + code-review) per ticket with /clear between -> pr -> retro. Keep the first three steps in one unbroken context window.</p></div></div>
+        <div class="row"><div><h4>No adversarial skill</h4></div><div><p>Proposals <a href="https://github.com/mattpocock/skills/issues/633">#633</a> (/review-spec) and <a href="https://github.com/mattpocock/skills/issues/1051">#1051</a> (/red-team) were closed under the no-new-skills rule. His code-review is two axes, Standards and Spec, run in parallel and never merged or reranked.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="poteto">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">03 · poteto</span><h2>Verification is the bottleneck</h2></div>
+      <p>No <code>poteto/skills</code> repo exists. The work lives in Cursor's <code>pstack</code> plugin, plus <code>noodle</code>, <code>brainmaxxing</code>, <code>how</code>, and a verification-skill example. She explicitly rejects planning skills.</p>
+    </div>
+    <blockquote>"Most harnesses that have plan modes tend to over-specify implementation details and under-specify everything else. The truth is that I do plan, but I do so through code. I never bother with reviewing abstract plans adversarially. The agents start hallucinating theoretical risks."<cite>The Complete Guide to pstack, Pt. 2</cite></blockquote>
+    <div class="rows">
+      <div class="row"><div><h4>interrogate</h4></div><div><p>One reviewer per configured model family, same prompt and rubric: Correctness, Root Causes vs Symptoms, Structural Integrity, Verification, Complexity Budget, Security. Then <strong>lead judgment</strong> with anti-noise rules: Nitpick Gravity, Hypothetical vs Actual, I Would Have Done It Differently. "If your Act On list has more than 5 items, you're probably not filtering hard enough." The Dismissed section is a trust mechanism.</p></div></div>
+      <div class="row"><div><h4>adversarial-review (noodle)</h4></div><div><p>Reviewer count scales with diff size: Skeptic under 50 lines, plus Architect to 200, plus Minimalist above. Verdict PASS / CONTESTED / REJECT, then lead judgment. Reviewers must run through the other vendor's CLI.</p></div></div>
+      <div class="row"><div><h4>blast-radius</h4></div><div><p>A five-rung confidence ladder: "You said so. Worthless on its own." -> pointed at a line -> walked the failure -> ran it -> reproduced in the app. Prove "the one fact it's safe because of" by running code.</p></div></div>
+      <div class="row"><div><h4>Trust ladder</h4></div><div><p>Where to put a correction, most durable first: codebase &gt; static analysis &gt; rules &gt; skills &gt; style guides. <code>/correct</code> encodes it. "Textual instructions are routinely ignored. The instruction IS the symptom."</p></div></div>
+      <div class="row"><div><h4>Shape</h4></div><div><p>Almost every skill is <code>disable-model-invocation: true</code> and routed by one 20 KB <code>/poteto-mode</code>. Subagent prompts are separate template files. Every skill ends with a <strong>Reply:</strong> line. Phased skills open a todo list, one item per phase. Subagents get file pointers, not inlined context.</p></div></div>
+      <div class="row"><div><h4>Human in the loop</h4></div><div><p>"Never block on the human. Reserve confirmation for irreversible actions." Questions answerable by running something are not the human's to answer. The opposite pole from grilling.</p></div></div>
+    </div>
+    <h3 style="margin:32px 0 12px">Side by side</h3>
+    <div class="table-scroll"><table>
+      <thead><tr><th>Axis</th><th>poteto</th><th>Pocock</th><th>dunky takes</th></tr></thead>
+      <tbody>
+        <tr><td>Center</td><td>Verification and evidence</td><td>Alignment with the human</td><td>Both. Oracle aligns, Red/Blue verifies.</td></tr>
+        <tr><td>Planning</td><td>Prototype is the plan</td><td>Grill, then spec, then tickets</td><td>Pocock, with prototype tickets first-class in Scout.</td></tr>
+        <tr><td>Human in loop</td><td>Never block</td><td>Decisions wait for the user</td><td>Pocock for decisions. poteto for facts.</td></tr>
+        <tr><td>Entry point</td><td>One fat router</td><td>Many one-line wrappers</td><td>Pocock. Fits nearest-wins AGENTS.md.</td></tr>
+        <tr><td>Review diversity</td><td>Model families</td><td>Two axes, no merge</td><td>Mandate (Red vs Blue) plus power. Model diversity optional.</td></tr>
+        <tr><td>Memory</td><td>brain vault, self-editing skills</td><td>Glossary, ADRs, retro</td><td>SPEC.md is the memory. Tracker holds decisions.</td></tr>
+        <tr><td>Scope policy</td><td>Fork it</td><td>Curated, closed</td><td>Curated. One skill per failure observed.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section id="scout">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">04 · Scout</span><h2>Chart the fog. Never build.</h2></div>
+      <p>Scout is wayfinder with its seven known holes closed and the tracker fixed to GitHub issues. It runs <strong>before SPEC</strong>. Its output is a set of closed decisions that the SPEC phase consumes.</p>
+    </div>
+    <div class="sm-wrap">
+      <div>
+        <div class="rows">
+          <div class="row"><div><h4>Invocation</h4></div><div><p><code>/scout &lt;loose idea&gt;</code> charts. <code>/scout #&lt;map&gt; [#ticket]</code> works one ticket. User-invoked only. It calls the Oracle primitive and <code>research</code>, <code>prototype</code> as model-invoked skills.</p></div></div>
+          <div class="row"><div><h4>Hard stops</h4></div><div><ul><li>No write path to source. Research lands on a <code>research/&lt;name&gt;</code> branch with no PR.</li><li>Notes cannot grant execution. The only "do" is a <code>scout:task</code> ticket, and it still needs a human claim.</li><li>HITL tickets close only after a user line in the thread.</li><li>One ticket per session. Re-size on claim; split before resolving.</li></ul></div></div>
+          <div class="row"><div><h4>Labels</h4></div><div><p><code>scout:map</code>, <code>scout:research</code>, <code>scout:prototype</code>, <code>scout:grill</code>, <code>scout:task</code>. Blocking uses GitHub's native dependency links. Never a triage label.</p></div></div>
+          <div class="row"><div><h4>Reopen</h4></div><div><p>A closed decision reopens only with new evidence posted as a comment. Borrowed from contrarian's settled ledger. This fills the "wrong closed decision" hole.</p></div></div>
+          <div class="row"><div><h4>Hand-off</h4></div><div><p>Map clear -> the SPEC phase of the target package. Scout tells the user to open <code>SPEC.md</code> with the map link. AGENTS.md rule stays: ask before creating a SPEC.md that does not exist.</p></div></div>
+          <div class="row"><div><h4>When not to use</h4></div><div><p>If the first breadth-first round surfaces no fog, Scout stops and says so. Most dunky changes are one-session. Scout is for state-machine-sized moves: a new substrate, the Rust twin, a website redesign.</p></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="sm-note">
+          <span class="eyebrow">Pros</span>
+          <ul><li>Memory lives in the tracker, not in context. Survives /clear and days away.</li><li>GitHub shows the frontier visually.</li><li>Research runs in parallel while you sleep.</li><li>Explicit out-of-scope list stops creep.</li></ul>
+          <span class="eyebrow">Cons</span>
+          <ul><li>Waterfall drift past ~12 tickets. Cap the first chart.</li><li>Issue noise in small repos. Use one map per epic, close maps when done.</li><li>Needs the Oracle to be terse or charting becomes a wall of text.</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="oracle">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">05 · Oracle</span><h2>The one that asks</h2></div>
+      <p>Grilling-derived. Model-invoked primitive plus a one-line user wrapper. It never acts. It ends a round only when the frontier is empty and you confirm. One mismatch to settle first: an <em>oracle</em> answers, this agent <em>asks</em>.</p>
+    </div>
+    <div class="rows" style="margin-bottom:32px">
+      <div class="row"><div><h4>Behavior contract</h4></div><div><ul><li>Frontier rounds. One sentence per question, one line per recommendation. Yes accepts the recommendation.</li><li>Facts are its job: it spawns a subagent and does not block. Decisions are yours.</li><li>Ends with the literal line <code>Shared understanding reached. Confirm to continue.</code> Scout and SPEC wait for that line. This closes wayfinder issue #1093.</li><li>Refers to things by name, never by ticket number.</li><li>Writes nothing. The same conversation flows into SPEC.</li></ul></div></div>
+      <div class="row"><div><h4>Where it fires</h4></div><div><p>Scout charting. SPEC drafting. Before TEST when seams are unclear ("the ideal number of seams is one"). On RECONCILE when Red / Blue returns Needs Discussion. Always with you, never alone.</p></div></div>
+      <div class="row"><div><h4>Support level</h4></div><div><p>One wrapper, two intensities. <code>/grill</code> runs the full frontier. <code>/grill --light</code> asks only the questions whose answer changes the next action. The light mode is the one you will reach for mid-flow.</p></div></div>
+    </div>
+    <h3 style="margin-bottom:8px">Twenty names</h3>
+    <p class="small">Star the ones you like. The pick is saved in this browser. Ranked by fit with the set: Scout, ____, Red, Blue.</p>
+    <div class="names" id="names"></div>
+    <p class="picked" id="picked"></p>
+  </div>
+</section>
+
+<section id="redblue">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">06 · Red / Blue</span><h2>Tower defense at RECONCILE</h2></div>
+      <p>The diff is the lane. Red is the wave: one attacker per equipped power, told "assume this is broken, find the concrete input that breaks it." Blue is the tower: one defender per claim, told "reproduce or refute, 'seems fine' is not a refutation." The gate scores survivors and writes the verdict. Toggle powers to see the wave.</p>
+    </div>
+    <div class="td">
+      <div class="td-controls" id="powers" role="group" aria-label="Equip powers"></div>
+      <div class="lane">
+        <div class="col"><div class="col-head red">Red · attackers</div><div id="red-units"></div></div>
+        <div class="arrow">claims<br>&gt;</div>
+        <div class="col"><div class="col-head blue">Blue · towers</div><div id="blue-units"></div></div>
+        <div class="arrow">survivors<br>&gt;</div>
+        <div class="col"><div class="col-head" style="color:var(--color-accent)">Gate · verdict</div><div id="gate-units"></div></div>
+      </div>
+      <div class="td-verdict" id="td-verdict"></div>
+    </div>
+
+    <h3 style="margin:40px 0 12px">Rules of engagement</h3>
+    <div class="rows">
+      <div class="row"><div><h4>Independence</h4></div><div><p>Red and Blue never see the author's reasoning. They get the diff, the SPEC.md, the power file, and the stated intent. superpowers and devils-advocate both enforce this.</p></div></div>
+      <div class="row"><div><h4>Concrete or nothing</h4></div><div><p>A Red claim needs file:line and a failure path: input or state -> wrong output. A Blue refutation needs the same. Static inference caps at Important. Only a run or a reproduction earns Critical.</p></div></div>
+      <div class="row"><div><h4>Gate</h4></div><div><p>Per surviving claim, one scorer rates confidence 0 to 100 and drops under 80 (Anthropic code-review). Then lead judgment sorts into Act on, Consider, Dismissed, with the Dismissed list visible (poteto). Cap Act on at five.</p></div></div>
+      <div class="row"><div><h4>Verdict words</h4></div><div><p>Ship / Fix first / Needs discussion. Needs discussion hands to the Oracle. Fix first loops to IMPLEMENT. Ship ends RECONCILE.</p></div></div>
+      <div class="row"><div><h4>Diversity</h4></div><div><p>Default is mandate diversity, same model. Optional <code>--cross</code> runs Red on a second model family through its CLI. poteto's position: "the adversarial signal comes from model diversity, not assigned personas." Same-model agreement may be shared bias.</p></div></div>
+      <div class="row"><div><h4>On specs</h4></div><div><p>Not the full wave. Pocock closed /review-spec, poteto reports hallucinated risk. Specs get one power only, <strong>spec-completeness</strong>, with binary criteria: ambiguity, missing non-goals, untestable behavior. Borrowed from devils-advocate's 22-criteria plan check.</p></div></div>
+      <div class="row"><div><h4>Sizing</h4></div><div><p>Attackers per power scale with diff size: 1 under 50 lines, 2 to 200, 3 above. Blue is always one per claim. Cost note: agent-review-panel self-reports $3 to $20 a run with 69% in orchestrator turns. Keep the orchestrator thin.</p></div></div>
+    </div>
+
+    <h3 style="margin:40px 0 8px">The plug: powers</h3>
+    <p>A power is one file: <code>powers/&lt;name&gt;.md</code> with a hunt list for Red, a refute list for Blue, and the sources it is derived from. The skill body holds only a routing table. Signal detection picks defaults: a diff touching <code>packages/react</code> equips a11y and design-system, a diff touching <code>SPEC.md</code> equips spec-completeness. You can always override with flags.</p>
+    <div class="chips" role="group" aria-label="Filter powers">
+      <button class="chip" data-lens="all" aria-pressed="true">All</button>
+      <button class="chip" data-lens="now" aria-pressed="false">Build now</button>
+      <button class="chip" data-lens="later" aria-pressed="false">Later</button>
+      <button class="chip" data-lens="dunky" aria-pressed="false">dunky-only</button>
+    </div>
+    <div class="lens-grid" id="lenses"></div>
+  </div>
+</section>
+
+<section id="flow">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">07 · Flow</span><h2>Where each agent fires</h2></div>
+      <p>Your AGENTS.md loop is the frame. Nothing new is added to it. Click a state to see who is on duty and what artifact closes it.</p>
+    </div>
+    <div class="sm-wrap">
+      <div class="sm">
+        <svg viewBox="0 0 760 300" role="img" aria-labelledby="sm-title">
+          <title id="sm-title">State machine: Fog, Spec, Test, Implement, Reconcile, Ship, with agents per state</title>
+          <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--color-rule-2)"/></marker></defs>
+          <g class="state" data-state="fog" tabindex="0" role="button" aria-label="Fog"><rect x="20" y="110" width="110" height="60" rx="8"/><text x="75" y="135" text-anchor="middle">FOG</text><text class="sub" x="75" y="152" text-anchor="middle">pre-spec</text><text class="agent accent" x="75" y="190" text-anchor="middle">Scout + Oracle</text></g>
+          <path class="edge" d="M130 140 H168"/>
+          <g class="state" data-state="spec" tabindex="0" role="button" aria-label="Spec"><rect x="170" y="110" width="110" height="60" rx="8"/><text x="225" y="135" text-anchor="middle">SPEC</text><text class="sub" x="225" y="152" text-anchor="middle">SPEC.md</text><text class="agent accent" x="225" y="190" text-anchor="middle">Oracle</text><text class="agent red" x="225" y="204" text-anchor="middle">Red (completeness)</text></g>
+          <path class="edge" d="M280 140 H318"/>
+          <g class="state" data-state="test" tabindex="0" role="button" aria-label="Test"><rect x="320" y="110" width="110" height="60" rx="8"/><text x="375" y="135" text-anchor="middle">TEST</text><text class="sub" x="375" y="152" text-anchor="middle">behavior first</text><text class="agent accent" x="375" y="190" text-anchor="middle">Oracle --light</text></g>
+          <path class="edge" d="M430 140 H468"/>
+          <g class="state" data-state="impl" tabindex="0" role="button" aria-label="Implement"><rect x="470" y="110" width="110" height="60" rx="8"/><text x="525" y="135" text-anchor="middle">IMPLEMENT</text><text class="sub" x="525" y="152" text-anchor="middle">cover intent</text><text class="agent" x="525" y="190" text-anchor="middle">you + builder</text></g>
+          <path class="edge" d="M580 140 H618"/>
+          <g class="state" data-state="rec" tabindex="0" role="button" aria-label="Reconcile"><rect x="620" y="110" width="120" height="60" rx="8"/><text x="680" y="135" text-anchor="middle">RECONCILE</text><text class="sub" x="680" y="152" text-anchor="middle">spec still true?</text><text class="agent red" x="680" y="190" text-anchor="middle">Red wave</text><text class="agent blue" x="680" y="204" text-anchor="middle">Blue towers + gate</text></g>
+          <path class="edge" d="M680 110 V70 H225 V108"/><text class="edge-label" x="452" y="62" text-anchor="middle">loop back: spec drifted</text>
+          <path class="edge" d="M640 110 V88 H375 V108"/><text class="edge-label" x="507" y="84" text-anchor="middle">loop back: fix first</text>
+          <path class="edge" d="M680 170 V240"/><text class="edge-label" x="700" y="262" text-anchor="middle">Ship</text>
+          <path class="edge" d="M75 110 V40 H20 V140 H18" style="marker-end:none;opacity:0"/>
+        </svg>
+      </div>
+      <div class="sm-note" id="sm-note">
+        <h4>Click a state</h4>
+        <p>Each state shows who is on duty, what closes it, and the gate that lets the machine move on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="repo">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">08 · Repo</span><h2>Shape of this repository</h2></div>
+      <p>Skills are markdown directories. The monorepo tooling here is useful for the scripts that powers call, not for the skills themselves. Skills follow the same four-phase loop as code.</p>
+    </div>
+    <div class="sm-wrap">
+      <div>
+<pre class="tree"><code>skills/
+  AGENTS.md                 <span class="c"># the contract, already here</span>
+  .claude-plugin/
+    plugin.json             <span class="c"># installable via claude plugin / npx skills add</span>
+  skills/
+    scout/
+      SPEC.md               <span class="c"># intent, behavior contract, non-goals</span>
+      SKILL.md              <span class="c"># user-invoked, ~120 lines</span>
+      evals/                <span class="c"># pressure scenarios, RED before GREEN</span>
+    grill/                  <span class="c"># one-line wrapper over grilling</span>
+    grilling/               <span class="c"># model-invoked primitive</span>
+    red-blue/
+      SKILL.md              <span class="c"># routing table + rules of engagement</span>
+      references/
+        red-prompt.md       <span class="c"># attacker template, filled per power</span>
+        blue-prompt.md      <span class="c"># defender template</span>
+        gate-prompt.md      <span class="c"># scorer + lead judgment</span>
+      powers/
+        spec-fidelity.md
+        logic.md
+        principles.md
+        a11y.md
+        ...                 <span class="c"># one file per power, see catalogue</span>
+    research/               <span class="c"># model-invoked, AFK, used by scout</span>
+    prototype/              <span class="c"># model-invoked, used by scout</span>
+  packages/
+    skill-scripts/          <span class="c"># TS helpers a power may run (diff sizing, twin-parity check)</span>
+  research/
+    skills-landscape.html   <span class="c"># this file</span></code></pre>
+      </div>
+      <div>
+        <div class="rows">
+          <div class="row"><div><h4>Loop for a skill</h4></div><div><p><strong>SPEC</strong> is the skill's SPEC.md. <strong>TEST</strong> is an eval scenario that fails without the skill (superpowers' RED baseline). <strong>IMPLEMENT</strong> is SKILL.md under 150 lines. <strong>RECONCILE</strong> is <code>claude plugin eval</code> plus <code>/skill-doctor</code>, and Red / Blue with the <code>skill-quality</code> power.</p></div></div>
+          <div class="row"><div><h4>Conventions</h4></div><div><ul><li>Description is the trigger, never a summary of the workflow.</li><li>User-invoked skills set <code>disable-model-invocation: true</code> and call primitives by Skill tool name.</li><li>Every skill ends with a <strong>Reply:</strong> line.</li><li>References one level deep. No <code>@</code> links.</li><li>Scripts for anything deterministic.</li></ul></div></div>
+          <div class="row"><div><h4>Changesets</h4></div><div><p>Keep them. A skill is a public package to its consumers. A changed verdict word or a new power is a minor. A tightened prompt is a patch.</p></div></div>
+          <div class="row"><div><h4>Open question</h4></div><div><p><code>packages/core</code> is a placeholder from the template. Either it becomes <code>skill-scripts</code> or it goes. ARCHITECTURE.md needs the dependency direction: skills may call scripts, scripts never read skills.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="decisions">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">09 · Decisions</span><h2>The frontier for our next session</h2></div>
+      <p>These are yours, not mine. Each has a recommended answer. Tick a box when settled. Saved in this browser.</p>
+    </div>
+    <div class="progress" id="progress"></div>
+    <ul class="decisions" id="decision-list"></ul>
+  </div>
+</section>
+
+</main>
+<footer><div class="wrap">Research gathered 2026-10-15 from primary sources listed inline. Star counts and install counts are as displayed that day. No metric in this page is our own measurement.</div></footer>
+
+<script>
+(function () {
+  'use strict';
+  var store = {
+    get: function (k, d) { try { var v = localStorage.getItem('dunky-skills:' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+    set: function (k, v) { try { localStorage.setItem('dunky-skills:' + k, JSON.stringify(v)); } catch (e) {} }
+  };
+
+  /* nav active + reveal */
+  var links = Array.prototype.slice.call(document.querySelectorAll('#navlinks a'));
+  var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          links.forEach(function (a) { a.classList.toggle('is-active', a.getAttribute('href') === '#' + e.target.id); });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(function (s) { if (s) io.observe(s); });
+    var rev = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); rev.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.row, .card, .step').forEach(function (el) { el.classList.add('reveal'); rev.observe(el); });
+  }
+
+  /* tabs */
+  document.querySelectorAll('[role="tablist"]').forEach(function (list) {
+    var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+    function select(tab) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+      tab.focus();
+    }
+    tabs.forEach(function (t, i) {
+      t.tabIndex = t.getAttribute('aria-selected') === 'true' ? 0 : -1;
+      t.addEventListener('click', function () { select(t); });
+      t.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') select(tabs[(i + 1) % tabs.length]);
+        if (e.key === 'ArrowLeft') select(tabs[(i - 1 + tabs.length) % tabs.length]);
+      });
+    });
+  });
+
+  /* repo filter */
+  var repoChips = document.querySelectorAll('[data-filter]');
+  repoChips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      repoChips.forEach(function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
+      var f = chip.getAttribute('data-filter');
+      document.querySelectorAll('#repos .card').forEach(function (card) {
+        card.classList.toggle('is-hidden', f !== 'all' && card.getAttribute('data-tags').split(' ').indexOf(f) === -1);
+      });
+    });
+  });
+
+  /* names */
+  var names = [
+    ['Whetstone', 'whet', 'Sharpens your thinking, never cuts for you. Craft register, pairs with Red/Blue steel.', 1],
+    ['Gadfly', 'gadfly', 'Socrates called himself this. The one who stings you awake with questions.', 2],
+    ['Second', 'second', 'Your second in a duel. Stands by you, advises, never fights. Fits Scout / Red / Blue.', 3],
+    ['Socrates', 'socrates', 'Says exactly what it does. Risk: a heavy name for a terse agent.'],
+    ['Sparring', 'spar', 'A sparring partner. Light contact, you still throw the punches.'],
+    ['Counsel', 'counsel', 'Advises, does not decide. Reads formal next to Scout.'],
+    ['Oracle', 'oracle', 'Your working name. Note: oracles answer, this agent asks.'],
+    ['Sage', 'sage', 'Wise, calm. Same answering connotation as Oracle.'],
+    ['Lantern', 'lantern', 'Lights the next step, carries nothing. Expedition register with Scout.'],
+    ['Compass', 'compass', 'Points, does not walk. Collides with Scout semantics.'],
+    ['Plumb', 'plumb', 'A plumb line. Checks whether your idea stands straight.'],
+    ['Sieve', 'sieve', 'What falls through is noise. What stays is the decision.'],
+    ['Crucible', 'crucible', 'Heat until only the real thing remains. Could sound like Red.'],
+    ['Mirror', 'mirror', 'Shows you your own reasoning. Quiet, maybe too passive.'],
+    ['Duck', 'duck', 'Rubber duck debugging. Friendly, well understood, undersells it.'],
+    ['Dialectic', 'dialectic', 'Thesis, antithesis, synthesis. Academic.'],
+    ['Maieutic', 'maieutic', 'Socratic midwifery of ideas. Precise, nobody can spell it.'],
+    ['Inquisitor', 'inquisitor', 'Relentless questions. Hostile overtone.'],
+    ['Keel', 'keel', 'Keeps you upright under sail. Nautical, pairs with Scout.'],
+    ['Sounder', 'sounder', 'Sounding board plus depth sounding. Measures before you commit.']
+  ];
+  var starred = store.get('names', []);
+  var namesEl = document.getElementById('names');
+  names.forEach(function (n) {
+    var el = document.createElement('div');
+    el.className = 'name' + (n[3] ? ' is-top' : '');
+    var on = starred.indexOf(n[0]) !== -1;
+    el.innerHTML = '<button class="star" aria-pressed="' + on + '" aria-label="Star ' + n[0] + '">' + (on ? '★' : '☆') + '</button>' +
+      '<div><b>' + n[0] + (n[3] ? ' <span class="tag accent">#' + n[3] + '</span>' : '') + '</b><span class="cli">/' + n[1] + '</span><p>' + n[2] + '</p></div>';
+    el.querySelector('.star').addEventListener('click', function () {
+      var i = starred.indexOf(n[0]);
+      if (i === -1) starred.push(n[0]); else starred.splice(i, 1);
+      store.set('names', starred);
+      var now = i === -1;
+      this.setAttribute('aria-pressed', now);
+      this.textContent = now ? '★' : '☆';
+      renderPicked();
+    });
+    namesEl.appendChild(el);
+  });
+  function renderPicked() {
+    document.getElementById('picked').textContent = starred.length ? 'Starred: ' + starred.join(', ') : 'Nothing starred yet.';
+  }
+  renderPicked();
+
+  /* powers + tower defense */
+  var powers = [
+    { id: 'spec-fidelity', name: 'Spec fidelity', tier: 'now', dunky: true, red: 'Finds behavior SPEC.md promises that the diff does not deliver, or delivers differently.', blue: 'Quotes the SPEC line and the test that proves it.', src: 'Pocock code-review Spec axis; spec-kit analyze' },
+    { id: 'logic', name: 'Logic / correctness', tier: 'now', red: 'Hunts the input, race, or edge case that produces a wrong output.', blue: 'Runs or traces the exact path.', src: 'Anthropic code-review; Jewgah review-deep; agent-review-panel' },
+    { id: 'principles', name: 'Principles (KISS DRY YAGNI)', tier: 'now', red: 'Flags abstractions with one caller, duplicated rules, speculative machinery.', blue: 'Names the second caller or the requirement in front of us.', src: 'AGENTS.md; spec-kit Simplicity gate; robertoecf simplicity counterfactual' },
+    { id: 'standards', name: 'Repo standards', tier: 'now', red: 'Checks boundaries in AGENTS.md: core imports no substrate, targets never reimplement state, ASCII diagrams only.', blue: 'Cites the rule text and the file:line that obeys it.', src: 'Anthropic code-review CLAUDE.md agents; devils-advocate ADR rule' },
+    { id: 'testing', name: 'Testing', tier: 'now', red: 'Finds overlapping tests, implementation-coupled tests, missing behavior coverage.', blue: 'Shows the one test per behavior and the fixture location.', src: 'Anthropic pr-test-analyzer; Pocock tdd; AGENTS.md testing rules' },
+    { id: 'a11y', name: 'Accessibility', tier: 'now', red: 'Keyboard path, focus, names, announcements, contrast against ACCESSIBILITY.md.', blue: 'Walks the keyboard path and names the ARIA spec clause.', src: 'vercel web-design-guidelines; VoltAgent accessibility-tester; dunky ACCESSIBILITY.md' },
+    { id: 'architecture', name: 'Architecture', tier: 'now', red: 'Layer leaks, drift from documented dependency direction, band-aid conditionals.', blue: 'Cites ARCHITECTURE.md and the established pattern elsewhere.', src: 'VoltAgent architect-reviewer; code-review-skill architecture guide' },
+    { id: 'twin-parity', name: 'Twin parity (TS vs Rust)', tier: 'now', dunky: true, red: 'A behavior landed in one engine or one test suite only.', blue: 'Points at both twins, file by file.', src: 'state-machine AGENTS.md "Two engines, one spec"' },
+    { id: 'spec-completeness', name: 'Spec completeness (specs only)', tier: 'now', dunky: true, red: 'Ambiguity, missing non-goals, untestable sentences. Binary criteria only.', blue: 'Not used. The gate applies the checklist.', src: 'devils-advocate plan criteria; spec-kit NEEDS CLARIFICATION' },
+    { id: 'performance', name: 'Performance', tier: 'later', red: 'Allocation on hot paths, spreads in loops, closures per iteration, re-renders.', blue: 'Shows the benchmark or the hot-path trace.', src: 'AGENTS.md performance rule; vercel react-best-practices; /benchmark skill' },
+    { id: 'errors', name: 'Error handling', tier: 'later', red: 'Silent catch blocks, swallowed promises, fallbacks that hide failure.', blue: 'Shows the log line or the surfaced error.', src: 'Anthropic silent-failure-hunter' },
+    { id: 'o11y', name: 'Observability', tier: 'later', red: 'A failure path with no signal: no log, no metric, no trace.', blue: 'Names the signal and where it lands.', src: 'HAMY #8; BMAD *nfr' },
+    { id: 'ux', name: 'UX / design system', tier: 'later', red: 'States missing, copy off-voice, tokens bypassed, components hand-rolled.', blue: 'Cites the component and the token.', src: 'vercel web-design-guidelines; hallmark 8-state rule; aura skills at work' },
+    { id: 'security', name: 'Security', tier: 'later', red: 'Injection, auth gaps, secrets in text, leaky errors.', blue: 'Shows the sanitizer and the boundary.', src: 'lemon03390 specialist; VoltAgent security-auditor' },
+    { id: 'api', name: 'API design / breaking', tier: 'later', red: 'A public surface changed without a changeset or a major bump.', blue: 'Points at the changeset and the consumer-facing wording.', src: 'HAMY #8; AGENTS.md versioning' },
+    { id: 'docs', name: 'Docs / comments', tier: 'later', red: 'Comments that restate code, stale README, SPEC that no longer describes the code.', blue: 'Shows the why-comment or the updated doc.', src: 'Anthropic comment-analyzer; AGENTS.md comments rule' },
+    { id: 'i18n', name: 'Localization', tier: 'later', red: 'Hard-coded user strings, plural logic in code.', blue: 'Points at the key and the locale file.', src: 'vercel Locale & i18n' },
+    { id: 'skill-quality', name: 'Skill quality (this repo)', tier: 'later', dunky: true, red: 'Description summarizes the workflow, body over 150 lines, no-op lines, negations.', blue: 'Runs the deletion test and the eval.', src: 'Pocock writing-for-agents; smcleod pitfalls; Agent Skills spec' }
+  ];
+  var equipped = store.get('powers', ['spec-fidelity', 'logic', 'principles', 'standards']);
+  var powersEl = document.getElementById('powers');
+  powers.filter(function (p) { return p.id !== 'spec-completeness' && p.id !== 'skill-quality'; }).forEach(function (p) {
+    var b = document.createElement('button');
+    b.className = 'chip';
+    b.textContent = p.name;
+    b.setAttribute('aria-pressed', equipped.indexOf(p.id) !== -1);
+    b.addEventListener('click', function () {
+      var i = equipped.indexOf(p.id);
+      if (i === -1) equipped.push(p.id); else equipped.splice(i, 1);
+      store.set('powers', equipped);
+      b.setAttribute('aria-pressed', i === -1);
+      renderLane();
+    });
+    powersEl.appendChild(b);
+  });
+  function unit(cls, name, sub) {
+    return '<div class="unit ' + cls + '"><span class="u-name">' + name + '</span><span class="u-sub">' + sub + '</span></div>';
+  }
+  function renderLane() {
+    var on = powers.filter(function (p) { return equipped.indexOf(p.id) !== -1; });
+    var red = document.getElementById('red-units'), blue = document.getElementById('blue-units'), gate = document.getElementById('gate-units'), v = document.getElementById('td-verdict');
+    if (!on.length) {
+      red.innerHTML = blue.innerHTML = gate.innerHTML = '<div class="empty">Equip a power.</div>';
+      v.innerHTML = 'No wave. Nothing to defend.';
+      return;
+    }
+    red.innerHTML = on.map(function (p) { return unit('red', 'Red · ' + p.name, p.red); }).join('');
+    blue.innerHTML = on.map(function (p) { return unit('blue', 'Blue · ' + p.name, p.blue); }).join('');
+    gate.innerHTML = unit('gate', 'Scorer', 'One per surviving claim. Confidence 0 to 100. Drop under 80.') +
+      unit('gate', 'Lead judgment', 'Act on (max 5) / Consider / Dismissed. Dismissed stays visible.') +
+      unit('gate', 'Verdict', 'Ship / Fix first / Needs discussion');
+    var n = on.length;
+    v.innerHTML = '<strong>' + n + ' power' + (n > 1 ? 's' : '') + ' equipped.</strong> Wave size scales with the diff: ' + n + ' attacker' + (n > 1 ? 's' : '') + ' under 50 lines, ' + (n * 2) + ' to 200 lines, ' + (n * 3) + ' above. One tower per claim. Needs discussion hands to the Oracle. Fix first loops to IMPLEMENT.';
+  }
+  renderLane();
+
+  /* lens catalogue */
+  var lensEl = document.getElementById('lenses');
+  powers.forEach(function (p) {
+    var el = document.createElement('div');
+    el.className = 'lens';
+    el.setAttribute('data-tier', p.tier);
+    el.setAttribute('data-dunky', p.dunky ? '1' : '0');
+    el.innerHTML = '<b>' + p.name + ' <span class="tag ' + (p.tier === 'now' ? 'ok' : '') + '">' + (p.tier === 'now' ? 'build now' : 'later') + '</span>' + (p.dunky ? '<span class="tag accent">dunky</span>' : '') + '</b>' +
+      '<span class="src">Red: ' + p.red + '</span><br><span class="src">Blue: ' + p.blue + '</span><br><span class="src">From: ' + p.src + '</span>';
+    lensEl.appendChild(el);
+  });
+  var lensChips = document.querySelectorAll('[data-lens]');
+  lensChips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      lensChips.forEach(function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
+      var f = chip.getAttribute('data-lens');
+      document.querySelectorAll('#lenses .lens').forEach(function (l) {
+        var show = f === 'all' || (f === 'dunky' ? l.getAttribute('data-dunky') === '1' : l.getAttribute('data-tier') === f);
+        l.classList.toggle('is-hidden', !show);
+      });
+    });
+  });
+
+  /* state machine notes */
+  var notes = {
+    fog: { h: 'FOG · before SPEC', b: ['<strong>On duty:</strong> Scout charts, Oracle names the destination and maps the frontier.', '<strong>Closes with:</strong> a map whose Not-yet-specified list is empty.', '<strong>Gate:</strong> the Oracle line "Shared understanding reached." on every HITL ticket.', '<strong>Skip when:</strong> the first round surfaces no fog. Most changes start at SPEC.'] },
+    spec: { h: 'SPEC · intent, not checklist', b: ['<strong>On duty:</strong> you and the Oracle. Red with only the spec-completeness power, binary criteria.', '<strong>Closes with:</strong> SPEC.md describing the consumer API, the behavior contract, non-goals.', '<strong>Gate:</strong> no ambiguity marker left. Ask before creating a SPEC.md that does not exist.'] },
+    test: { h: 'TEST · executable spec', b: ['<strong>On duty:</strong> you. Oracle in light mode to agree the seams. "The ideal number is one."', '<strong>Closes with:</strong> behavior tests that fail. No overlap. Shared setup at the top.', '<strong>Gate:</strong> each test maps to one SPEC sentence.'] },
+    impl: { h: 'IMPLEMENT · cover the intent', b: ['<strong>On duty:</strong> you, or a builder subagent in a worktree for parallel tickets.', '<strong>Closes with:</strong> green tests, lint, typecheck. Match existing patterns or open it for discussion.', '<strong>Gate:</strong> the builder never judges its own change. That is the next state.'] },
+    rec: { h: 'RECONCILE · does the spec still describe the code?', b: ['<strong>On duty:</strong> Red wave through equipped powers. Blue towers per claim. Gate scores and judges.', '<strong>Closes with:</strong> Ship, plus a changeset for public changes.', '<strong>Loops:</strong> Fix first returns to IMPLEMENT. Spec drifted returns to SPEC. Needs discussion calls the Oracle.'] }
+  };
+  var note = document.getElementById('sm-note');
+  document.querySelectorAll('.sm .state').forEach(function (g) {
+    function show() {
+      document.querySelectorAll('.sm .state').forEach(function (s) { s.classList.toggle('is-on', s === g); });
+      var n = notes[g.getAttribute('data-state')];
+      note.innerHTML = '<h4>' + n.h + '</h4><ul>' + n.b.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>';
+    }
+    g.addEventListener('click', show);
+    g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(); } });
+  });
+
+  /* decisions */
+  var decisions = [
+    ['Name set', 'Scout, ____, Red, Blue. Recommended: Whetstone. Second is the tightest fit with the combat metaphor but reads badly in prose.'],
+    ['Tracker for Scout maps', 'Recommended: GitHub issues with scout:* labels. Local markdown is what Pocock warns against.'],
+    ['Oracle intensity flag', 'Recommended: /grill and /grill --light. One wrapper, two modes, same primitive.'],
+    ['Red / Blue diversity', 'Recommended: mandate diversity by default, --cross flag for a second model family through its CLI.'],
+    ['Red on specs', 'Recommended: yes, but only the spec-completeness power with binary criteria. No full wave on plans.'],
+    ['Power plug mechanism', 'Recommended: powers/<name>.md files plus a routing table in SKILL.md. Signal detection sets defaults from touched paths.'],
+    ['First four powers', 'Recommended: spec-fidelity, logic, principles, standards. a11y and twin-parity next.'],
+    ['Verdict words', 'Recommended: Ship / Fix first / Needs discussion. Needs discussion hands to the Oracle.'],
+    ['Confidence cut-off', 'Recommended: 80 of 100 per surviving claim, Anthropic style. Act on capped at five.'],
+    ['Repo shape', 'Recommended: skills/ at root, .claude-plugin for install, packages/skill-scripts for deterministic helpers. Drop packages/core.'],
+    ['SPEC.md per skill', 'Recommended: yes. AGENTS.md says ask first, so this is the ask.'],
+    ['Distribution', 'Recommended: Claude Code plugin marketplace first. skills.sh later if other harnesses matter.']
+  ];
+  var done = store.get('decisions', {});
+  var list = document.getElementById('decision-list');
+  decisions.forEach(function (d, i) {
+    var li = document.createElement('li');
+    var id = 'd' + i;
+    li.innerHTML = '<input type="checkbox" id="' + id + '"' + (done[id] ? ' checked' : '') + '><div><label for="' + id + '">' + d[0] + '</label><div class="d-body">' + d[1] + '</div></div>';
+    li.querySelector('input').addEventListener('change', function () { done[id] = this.checked; store.set('decisions', done); renderProgress(); });
+    list.appendChild(li);
+  });
+  function renderProgress() {
+    var n = Object.keys(done).filter(function (k) { return done[k]; }).length;
+    document.getElementById('progress').textContent = n + ' / ' + decisions.length + ' settled';
+  }
+  renderProgress();
+})();
+</script>
+</body>
+</html>

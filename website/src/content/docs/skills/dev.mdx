@@ -1,0 +1,74 @@
+---
+title: Dev
+description: Takes one task and brings it back proven.
+---
+
+import Compare from '../../../components/compare.astro'
+import Engine from '../../../components/engine.astro'
+
+The one who builds. Scout runs ahead and maps; a dev takes one task from
+that map and brings it back proven: specced, tested, implemented, checked,
+and run. It ends with one line that says whether the change needs a brawl.
+
+## The dunky way
+
+- **The repo wins.** A dev builds by the principles and the workflow in
+  `standards/`, but where `AGENTS.md`, `ARCHITECTURE.md`, or a `SPEC.md`
+  decides differently, the dev follows the repo and says so.
+- **Green is not safe.** The tests come first for a behavior change, and
+  the task is done only when one real run shows the new behavior.
+- **Settle facts, park decisions.** A dev answers what reading or running
+  can answer. A decision only you can make parks that one task with a
+  one-line question, and the other devs keep going.
+- **Nothing ships unseen.** A dev commits to its own branch and never
+  pushes or opens a PR. You decide when the change goes out.
+
+## Where it clicks
+
+<Engine active='dev' />
+
+Scout deploys one dev in your checkout for a single task, or one per task
+in their own git worktrees once you agree to run several at once. A dev reads the map and the standards, calls rubber-duck or
+spike after two failed approaches, and hands back a proven change.
+
+## With and without
+
+<Compare skill="dev">
+<Fragment slot="prompt">
+
+greet does not do what its spec says. Fix it.
+
+</Fragment>
+<Fragment slot="without">
+
+Fixed. `greet` now trims the name and treats an empty result as a stranger:
+
+```ts
+const trimmed = name.trim()
+if (trimmed === '') return 'Hello, stranger!'
+return `Hello, ${trimmed}!`
+```
+
+</Fragment>
+<Fragment slot="with">
+
+**Intent.** Trim the name; a whitespace-only name is a stranger, as
+`SPEC.md` says.
+
+- `src/greet.test.ts`: new tests for `" Ann "` and `"   "`. Both failed
+  first.
+- `src/greet.ts`: trim before the empty check.
+
+Proved it: `node --test src/greet.test.ts` passes, and
+`greet("   ")` now returns `Hello, stranger!`.
+
+Parked decisions: none. Notes for Scout: none.
+
+</Fragment>
+</Compare>
+
+## Call it
+
+Say "deploy a dev", "send a dev on this", or "need a dev". Or type
+`/dev <task>`. Scout deploys devs on its own, one per ready task. Read the
+[skill README](https://github.com/dunky-dev/skills/tree/main/skills/dev).

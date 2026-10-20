@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [{ "source": "/", "destination": "/skills", "permanent": false }],
+  "rewrites": [
+    { "source": "/skills", "destination": "/index.html" },
+    { "source": "/skills/", "destination": "/index.html" },
+    { "source": "/skills/:path*", "destination": "/:path*" }
+  ]
+}

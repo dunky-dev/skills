@@ -1,0 +1,72 @@
+---
+title: Spike
+description: Answers one question by trying.
+---
+
+import Compare from '../../../components/compare.astro'
+import Engine from '../../../components/engine.astro'
+
+Some questions no amount of thinking settles, and a short run or the right
+primary source settles them in minutes. A spike answers one question by
+trying: a throwaway proof of concept, or a focused learning run against
+the official docs, the spec, or the library's own source. Then it throws the
+code away and keeps what it learned.
+
+## The dunky way
+
+- **Settle facts by running.** A question that trying would answer never
+  goes to a human, and never gets answered from memory.
+- **A spike never ships.** Its code stays on a `research/` branch. A dev
+  builds the real thing.
+- **Nobody runs the same spike twice.** What it learned goes into Scout's
+  map, so the next session starts from the answer.
+
+## Where it clicks
+
+<Engine active='spike' />
+
+Spike sits beside the whole flow, next to rubber-duck. Scout and the devs
+deploy one when they are stuck on a question that trying would answer, and
+so can you.
+
+## With and without
+
+<Compare skill="spike" note="Illustrative. Written for this page, not recorded from a run. A recorded vibe-test run will replace it.">
+<Fragment slot="prompt">
+
+Can we run src/greet.ts on Node 24 without a build step?
+
+</Fragment>
+<Fragment slot="without">
+
+Yes, recent Node versions can run TypeScript directly, so you should be able
+to drop the build step.
+
+</Fragment>
+<Fragment slot="with">
+
+**Question.** Does Node 24 run `src/greet.ts` with no build step? Yes or no.
+
+**Answer.** Yes, for this file.
+
+**Evidence.** On branch `research/node-strip-types`:
+
+```
+$ node -e "import('./src/greet.ts').then(m => console.log(m.greet('')))"
+Hello, stranger!
+```
+
+Node strips type annotations only. A file that uses enums or other syntax
+that needs a compile step would still fail.
+
+**Note for Scout's map:** greet runs on Node 24 as it is; no build step
+needed for type-only TypeScript.
+
+</Fragment>
+</Compare>
+
+## Call it
+
+Say "spike it", "try this out", or "prove it with a quick PoC". Or type
+`/spike <question>`. Read the
+[skill README](https://github.com/dunky-dev/skills/tree/main/skills/spike).

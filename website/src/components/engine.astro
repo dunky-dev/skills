@@ -1,0 +1,196 @@
+---
+// The dunky engine: every skill, the artifacts they share, and how a task
+// moves from a request to a change, with the brawl on request. One drawing, reused on the big-picture page
+// and on each skill page with that skill highlighted.
+interface Props {
+  active?: 'scout' | 'dev' | 'rubber-duck' | 'spike' | 'brawl' | 'red-vs-blue'
+}
+const { active } = Astro.props
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const href = (name: string) => `${base}/skills/${name}`
+const cls = (name: string) => (name === active ? 'node active' : 'node')
+
+const W = 130
+const H = 56
+const skills = [
+  { name: 'scout', x: 250, y: 200, sub: 'maps, deploys' },
+  { name: 'dev', x: 430, y: 200, sub: 'builds one task' },
+  { name: 'brawl', x: 790, y: 200, sub: 'review on request' },
+  { name: 'red-vs-blue', x: 790, y: 340, sub: 'one finding' },
+  { name: 'rubber-duck', x: 340, y: 370, sub: 'think it through' },
+  { name: 'spike', x: 500, y: 370, sub: 'try it out' },
+]
+---
+
+<figure class="engine">
+  <svg viewBox="0 0 940 430" role="img" aria-labelledby="engine-title engine-desc">
+    <title id="engine-title">The dunky engine</title>
+    <desc id="engine-desc">
+      Your request goes to Scout. Scout writes the map and deploys a dev per task. Each dev builds
+      by the standards and hands back a change. When you ask, brawl reviews the change and sends
+      each finding to red-vs-blue. Anyone stuck calls rubber-duck or spike.
+    </desc>
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" class="arrowhead"></path>
+      </marker>
+    </defs>
+
+    <!-- artifacts the skills share -->
+    <g class="artifact">
+      <rect x="175" y="42" width="150" height="56" rx="8"></rect>
+      <text x="250" y="66">.dunky/scout.md</text>
+      <text x="250" y="84" class="sub">the map and the queue</text>
+      <rect x="525" y="42" width="170" height="56" rx="8"></rect>
+      <text x="610" y="66">standards/</text>
+      <text x="610" y="84" class="sub">principles, workflow, lenses</text>
+    </g>
+
+    <!-- the main line, then the brawl on request -->
+    <g class="edge">
+      <line x1="122" y1="200" x2="183" y2="200" marker-end="url(#arrow)"></line>
+      <line x1="315" y1="200" x2="363" y2="200" marker-end="url(#arrow)"></line>
+      <line x1="495" y1="200" x2="548" y2="200" marker-end="url(#arrow)"></line>
+      <line x1="775" y1="228" x2="775" y2="310" marker-end="url(#arrow)"></line>
+      <line x1="805" y1="312" x2="805" y2="230" marker-end="url(#arrow)"></line>
+    </g>
+    <g class="edge dashed">
+      <line x1="652" y1="200" x2="723" y2="200" marker-end="url(#arrow)"></line>
+    </g>
+    <g class="label">
+      <text x="152" y="190">asks</text>
+      <text x="339" y="190">deploys</text>
+      <text x="521" y="190">builds</text>
+      <text x="688" y="190">you ask</text>
+      <text x="766" y="272" class="end">each finding</text>
+      <text x="814" y="272" class="start">survives or falls</text>
+    </g>
+
+    <!-- who reads and writes the artifacts -->
+    <g class="edge dashed">
+      <line x1="250" y1="172" x2="250" y2="100" marker-end="url(#arrow)"></line>
+      <line x1="315" y1="88" x2="400" y2="170" marker-end="url(#arrow)"></line>
+      <line x1="570" y1="100" x2="470" y2="170" marker-end="url(#arrow)"></line>
+      <line x1="660" y1="100" x2="755" y2="170" marker-end="url(#arrow)"></line>
+    </g>
+    <g class="label">
+      <text x="242" y="140" class="end">writes</text>
+      <text x="362" y="118" class="start">reads</text>
+      <text x="530" y="152" class="start">builds by</text>
+      <text x="718" y="118" class="start">lenses</text>
+    </g>
+
+    <!-- where the line starts and what it hands back -->
+    <g class="end">
+      <rect x="40" y="182" width="80" height="36" rx="18"></rect>
+      <text x="80" y="205">you</text>
+      <rect x="550" y="182" width="100" height="36" rx="18"></rect>
+      <text x="600" y="205">your change</text>
+    </g>
+
+    <!-- stuck, anyone, any step -->
+    <g class="zone">
+      <rect x="260" y="318" width="320" height="104" rx="12"></rect>
+      <text x="420" y="336">stuck? anyone calls, at any step</text>
+    </g>
+    <g class="edge dashed">
+      <line x1="270" y1="228" x2="310" y2="316" marker-end="url(#arrow)"></line>
+      <line x1="440" y1="228" x2="440" y2="316" marker-end="url(#arrow)"></line>
+    </g>
+
+    <!-- several devs run at once -->
+    <g class="ghost">
+      <rect x={430 - W / 2 + 8} y={200 - H / 2 - 8} width={W} height={H} rx="10"></rect>
+      <rect x={430 - W / 2 + 4} y={200 - H / 2 - 4} width={W} height={H} rx="10"></rect>
+    </g>
+
+    {
+      skills.map(s => (
+        <a href={href(s.name)} class={cls(s.name)} aria-current={s.name === active ? 'page' : undefined}>
+          <rect x={s.x - W / 2} y={s.y - H / 2} width={W} height={H} rx="10" />
+          <text x={s.x} y={s.y - 2}>{s.name}</text>
+          <text x={s.x} y={s.y + 16} class="sub">
+            {s.sub}
+          </text>
+        </a>
+      ))
+    }
+  </svg>
+</figure>
+
+<style>
+  .engine {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+  svg {
+    min-width: 720px;
+    width: 100%;
+    height: auto;
+    font-family: var(--sl-font);
+  }
+  text {
+    fill: var(--sl-color-white);
+    font-size: 15px;
+    text-anchor: middle;
+  }
+  .label .start {
+    text-anchor: start;
+  }
+  .label .end {
+    text-anchor: end;
+  }
+  .sub,
+  .label text {
+    fill: var(--sl-color-gray-2);
+    font-size: 12px;
+  }
+  .node rect,
+  .end rect {
+    fill: var(--sl-color-gray-6);
+    stroke: var(--sl-color-gray-4);
+    stroke-width: 1.5;
+  }
+  .node text:not(.sub) {
+    font-weight: 600;
+  }
+  .node:hover rect,
+  .node:focus-visible rect {
+    stroke: var(--sl-color-accent);
+    stroke-width: 2.5;
+  }
+  .node.active rect {
+    fill: var(--sl-color-accent-low);
+    stroke: var(--sl-color-accent);
+    stroke-width: 2.5;
+  }
+  .ghost rect {
+    fill: var(--sl-color-gray-6);
+    stroke: var(--sl-color-gray-5);
+  }
+  .artifact rect {
+    fill: none;
+    stroke: var(--sl-color-gray-3);
+    stroke-dasharray: 5 4;
+  }
+  .zone rect {
+    fill: none;
+    stroke: var(--sl-color-gray-4);
+    stroke-dasharray: 2 4;
+  }
+  .zone text {
+    fill: var(--sl-color-gray-2);
+    font-size: 12px;
+  }
+  .edge line,
+  .edge path {
+    stroke: var(--sl-color-gray-3);
+    stroke-width: 1.5;
+  }
+  .edge.dashed line {
+    stroke-dasharray: 5 4;
+  }
+  .arrowhead {
+    fill: var(--sl-color-gray-3);
+  }
+</style>

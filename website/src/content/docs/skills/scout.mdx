@@ -1,0 +1,89 @@
+---
+title: Scout
+description: Goes in first, maps the code, then deploys a dev per task.
+---
+
+import { Image } from 'astro:assets'
+import Compare from '../../../components/compare.astro'
+import Engine from '../../../components/engine.astro'
+import scout from '../../../../../skills/scout/media/scout.png'
+
+<Image
+  src={scout}
+  alt='The Scout from Team Fortress 2: cap, hood, headset, scattergun, sprinting.'
+  width={480}
+  class='skill-media'
+/>
+
+The runner. Designed after the Scout from Team Fortress 2, the fastest
+class in the game: it gets there first, works up close, and never holds
+ground. Scout goes into a codebase before anyone builds, writes down what
+matters in one map, then deploys a dev on every task you asked for and
+keeps running.
+
+## The dunky way
+
+- **Map before you build.** Every dev reads the map. Scout draws it first:
+  the boundaries where one part of the code meets the rest, the intent
+  behind the code, the files that matter, and notes that keep a long run
+  from going in circles.
+- **The repo wins.** Scout reads `README.md`, `AGENTS.md`,
+  `ARCHITECTURE.md`, each `SPEC.md`, and `CONTRIBUTING.md` before the code.
+  The map points at them and keeps only what they do not say.
+- **The map informs, never authorizes.** A note is a hint to check. The
+  queue holds only the tasks you asked for, never Scout's own ideas.
+- **Never wait, but ask before many hands.** A single task runs in your
+  checkout. Several run in parallel, one git worktree each, after Scout
+  asks you once where the worktrees go. Every task shows where it runs.
+
+## Where it clicks
+
+<Engine active='scout' />
+
+Scout sits right after the front door. It is the only skill that writes the
+map in `.dunky/scout.md`, a gitignored file the next session starts from.
+It hands every task to a dev, and calls rubber-duck or spike when it gets
+stuck.
+
+## With and without
+
+<Compare skill="scout">
+<Fragment slot="prompt">
+
+I'm new to this repo. Get me oriented, and leave something behind so the
+next session does not start from zero.
+
+</Fragment>
+<Fragment slot="without">
+
+This repo is a small TypeScript package. `src/greet.ts` exports a `greet`
+function, `SPEC.md` describes it, and `AGENTS.md` sets the workflow. I can
+write a summary into a `NOTES.md` file if you want one.
+
+</Fragment>
+<Fragment slot="with">
+
+Map written to `.dunky/scout.md`. `.dunky/` is now in `.gitignore`.
+
+```
+AGENTS.md  -- rules -->  src/greet.ts  <-- contract --  SPEC.md
+```
+
+- `src/greet.ts` is the only code. Pure TypeScript, no platform imports.
+  (stated: AGENTS.md)
+- The spec says names are trimmed; the code never trims.
+  (read: src/greet.ts:3)
+- Note for the next session: a whitespace-only name is greeted with its
+  spaces, not as a stranger. (read: src/greet.ts:2)
+
+Queue: empty. Nothing left unexplored.
+
+</Fragment>
+</Compare>
+
+## Call it
+
+Say "I need a scout", "map this", or "get me oriented". Or type
+`/scout` for the whole repo, or `/scout <area or task>` to map one area and
+deploy devs on it. Read the
+[skill README](https://github.com/dunky-dev/skills/tree/main/skills/scout).

@@ -1,10 +1,14 @@
 .worktrees
-node_modules
-dist
+.dunky/
 .DS_Store
 *.log
-.vite
-*.tsbuildinfo
+node_modules
+dist
+.astro
 
-# local-only Claude settings (never committed; keep it out of format/lint too)
+# vibe runs are local; keep only what you promote to a baseline
+vibe/results/*
+!vibe/results/.gitkeep
+
+# local-only Claude settings (never committed)
 .claude/settings.local.json

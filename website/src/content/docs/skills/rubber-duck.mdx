@@ -1,0 +1,69 @@
+---
+title: Rubber duck
+description: Talks a hard thought through with whoever is stuck.
+---
+
+import Compare from '../../../components/compare.astro'
+import Engine from '../../../components/engine.astro'
+
+The one you talk to when you are stuck. Named after rubber duck debugging
+from _The Pragmatic Programmer_: explain your code to a rubber duck, and the
+bug shows itself in the explaining. This duck talks back a little. It
+reflects the problem, splits what you know from what you must decide, asks
+the questions that unblock you, and never decides for you.
+
+## The dunky way
+
+- **Anyone can be stuck.** You, Scout, or a dev can call it, at any step.
+- **Settle facts, ask decisions.** A fact that a run or a doc would settle
+  is not a thought problem. The duck points it to spike or to the file to
+  read.
+- **The thinker owns the answer.** The duck gives no recommendation,
+  because a recommendation is a decision.
+
+## Where it clicks
+
+<Engine active='rubber-duck' />
+
+Rubber-duck sits beside the whole flow, next to spike. A thought or a
+decision goes to the duck; a question that trying would answer goes to
+spike.
+
+## With and without
+
+<Compare skill="rubber-duck" note="Illustrative. Written for this page, not recorded from a run. A recorded vibe-test run will replace it.">
+<Fragment slot="prompt">
+
+I can't decide whether greet should throw on an empty name or return a
+default greeting.
+
+</Fragment>
+<Fragment slot="without">
+
+Return a default. Throwing on an empty string is unfriendly for a greeting
+function, and the spec already says "Hello, stranger!". Here is the change...
+
+</Fragment>
+<Fragment slot="with">
+
+**The problem.** Should an empty name be an error or a valid input with a
+default? The answer decides what callers must handle.
+
+**Facts, not thoughts.** `SPEC.md` already states a default for an empty
+name. Read it before deciding.
+
+**The decision.** Throw: callers learn about bad input early, but every
+caller must catch. Default: callers stay simple, but bad input passes
+silently.
+
+1. Do any callers pass user input straight in?
+2. Is an empty name ever a bug in your system, or always a real case?
+
+</Fragment>
+</Compare>
+
+## Call it
+
+Say "rubber duck this", "I'm stuck", or "help me think this through". Or
+type `/rubber-duck <what you are stuck on>`. Read the
+[skill README](https://github.com/dunky-dev/skills/tree/main/skills/rubber-duck).

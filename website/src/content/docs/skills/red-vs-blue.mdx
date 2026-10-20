@@ -1,0 +1,83 @@
+---
+title: Red vs Blue
+description: One finding, one fight. Survives or falls.
+---
+
+import Compare from '../../../components/compare.astro'
+import Engine from '../../../components/engine.astro'
+import robots from '../../../../../skills/red-vs-blue/media/robots-fight.gif'
+
+<img
+  src={robots.src}
+  alt='Two toy boxing robots, one red and one blue, trading punches in a small ring while two hands work the controls.'
+  width='480'
+  height='270'
+  class='skill-media'
+/>
+
+One finding, one fight. Red argues the finding is real and finds the input
+that breaks the code. Blue reproduces it or refutes it. The gate scores what
+is left. A review comment goes in; one word comes out: Survives or Falls.
+Pictured as Rock 'Em Sock 'Em Robots: two fighters built the same, told to
+win opposite fights.
+
+## The dunky way
+
+- **One finding, one fight.** A PR comment never turns into a thread of
+  agents arguing. It gets one fight, settled with evidence.
+- **Green is not safe, and neither is "seems fine".** Red climbs the
+  evidence ladder in `standards/severity.md`: point at the line, walk the
+  path, run it. Blue needs the same kind of evidence to refute.
+- **The repo wins.** A rule in `AGENTS.md` or a `SPEC.md` that makes the
+  behavior intended ends the fight: the finding falls as intended.
+- **Same model, opposite mandates.** The signal comes from the fight, not
+  from either side being smarter.
+
+## Where it clicks
+
+<Engine active='red-vs-blue' />
+
+Brawl sends every finding it raises through its own fight, so each one is
+settled before a reviewer sees it. You can bring one yourself too: a
+teammate's PR comment, a bug report, a claim you doubt.
+
+## With and without
+
+<Compare skill="red-vs-blue">
+<Fragment slot="prompt">
+
+A reviewer left this comment on my PR: "`greet('')` returns `Hello, !`
+because the empty name is never handled." Is that right?
+
+</Fragment>
+<Fragment slot="without">
+
+Good catch from your reviewer. Empty strings are a common edge case. Here
+is a fix that handles it:
+
+```ts
+if (!name) return 'Hello, stranger!'
+```
+
+</Fragment>
+<Fragment slot="with">
+
+**Finding.** `greet('')` returns `Hello, !`. Where: `src/greet.ts`.
+
+**Red.** Could not make it concrete. The empty string is handled before the
+template.
+
+**Blue.** Refuted. `src/greet.ts:2` returns `Hello, stranger!` for `''`.
+Ran it: `greet('')` gives `Hello, stranger!`.
+
+**Gate.** Confidence 5. Severity: none. **Falls.**
+
+</Fragment>
+</Compare>
+
+## Call it
+
+Say "red vs blue this", "fight this finding", or "is this comment real?".
+Or type `/red-vs-blue "<comment>"`, and add `--cross` to run Red on a second
+model family. Read the
+[skill README](https://github.com/dunky-dev/skills/tree/main/skills/red-vs-blue).

@@ -1,18 +1,9 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": [
-    "eslint",
-    "import",
-    "node",
-    "oxc",
-    "promise",
-    "react",
-    "typescript",
-    "unicorn",
-    "vitest"
-  ],
+  "plugins": ["eslint", "import", "node", "oxc", "promise", "typescript", "unicorn"],
   "rules": {
     "eslint/arrow-body-style": ["error", "as-needed"],
+    "eslint/no-unused-vars": "error",
     "import/newline-after-import": "error",
     "unicorn/filename-case": [
       "error",
@@ -23,26 +14,8 @@
     "unicorn/no-useless-spread": "off",
     "typescript/no-this-alias": "off"
   },
-  "overrides": [
-    {
-      "files": ["packages/**/src/**/*.ts", "packages/**/src/**/*.tsx"],
-      "rules": {
-        "import/no-default-export": "error"
-      }
-    },
-    {
-      "files": ["**/*.test.ts", "**/*.test.tsx"],
-      "rules": {
-        "vitest/require-mock-type-parameters": "off"
-      }
-    }
-  ],
   "categories": {},
-  "settings": {
-    "vitest": {
-      "typecheck": false
-    }
-  },
+  "settings": {},
   "globals": {},
-  "ignorePatterns": ["**/dist/**"]
+  "ignorePatterns": ["**/dist/**", "vibe/fixtures/**", "website/public/logo/**"]
 }

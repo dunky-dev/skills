@@ -13,11 +13,8 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "paths": {
-      "@dunky-dev/core": ["./packages/core/src"]
-    },
-    "types": ["@types/node", "vitest/globals"]
+    "types": ["@types/node"]
   },
-  "include": ["./*.ts", "./packages"],
+  "include": ["./*.ts"],
   "exclude": ["**/node_modules", "**/dist"]
 }

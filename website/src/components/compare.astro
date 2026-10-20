@@ -1,0 +1,116 @@
+---
+// One prompt, two answers side by side: the agent without the skill and
+// with it. Slots carry markdown: "prompt", "without", "with".
+interface Props {
+  skill: string
+  note?: string
+}
+const {
+  skill,
+  note = "Illustrative. Written from the skill's scenario rubric, not recorded from a run. A recorded vibe-test run will replace it.",
+} = Astro.props
+---
+
+<figure class="compare">
+  <div class="prompt">
+    <span class="who">You</span>
+    <div class="body"><slot name="prompt" /></div>
+  </div>
+  <div class="answers">
+    <section class="answer without" aria-label="Answer without the skill">
+      <header><span class="dot"></span>Without the skill</header>
+      <div class="body"><slot name="without" /></div>
+    </section>
+    <section class="answer with" aria-label={`Answer with ${skill}`}>
+      <header><span class="dot"></span>With <code>{skill}</code></header>
+      <div class="body"><slot name="with" /></div>
+    </section>
+  </div>
+  <figcaption>{note}</figcaption>
+</figure>
+
+<style>
+  /* The page's markdown flow adds a top margin between siblings; the grid
+     gaps space this frame instead. */
+  .compare :is(.prompt, .who, .body, .answers, .answer, header, figcaption) {
+    margin-top: 0 !important;
+  }
+  .body > :first-child {
+    margin-top: 0 !important;
+  }
+  .compare {
+    margin: 1.5rem 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .prompt {
+    display: grid;
+    gap: 0.4rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: 0.75rem;
+    border-left: 4px solid var(--sl-color-accent);
+    background: var(--sl-color-accent-low);
+  }
+  .who {
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--sl-color-accent-high);
+  }
+  .answers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  @media (max-width: 50rem) {
+    .answers {
+      grid-template-columns: 1fr;
+    }
+  }
+  .answer {
+    min-width: 0;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+  .answer.with {
+    border-color: var(--sl-color-accent);
+    box-shadow: 0 0 0 1px var(--sl-color-accent);
+  }
+  header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    color: var(--sl-color-gray-2);
+    background: var(--sl-color-gray-6);
+    border-bottom: 1px solid var(--sl-color-gray-5);
+  }
+  .with header {
+    color: var(--sl-color-white);
+    background: var(--sl-color-accent-low);
+    border-bottom-color: var(--sl-color-accent);
+  }
+  .dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--sl-color-gray-4);
+  }
+  .with .dot {
+    background: var(--sl-color-accent);
+  }
+  .answer .body {
+    padding: 0.9rem 1rem;
+    font-size: var(--sl-text-sm);
+    overflow-x: auto;
+  }
+  figcaption {
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+</style>

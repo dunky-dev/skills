@@ -1,0 +1,16 @@
+---
+title: Install
+description: Add the dunky skills to any agent that reads the Agent Skills format.
+---
+
+```bash
+npx skills add dunky-dev/skills
+```
+
+Pick the skills you want, or pass `--all`. The installer detects the agents
+on your machine and places each skill where that agent reads it:
+`.claude/skills/` for Claude Code, `.agents/skills/` for Codex, Cursor,
+OpenCode, and the rest.
+
+Standards live at the repo root in `standards/`. A skill that equips one
+reads it from the repo it runs in.

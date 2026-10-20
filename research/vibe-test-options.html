@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vibe-testing skills · six options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · pre-emit critique: P5 H4 E4 S5 R4 V4 */
+/* Hallmark · genre: modern-minimal · macrostructure: Comparison-led brief · theme: Cobalt (Dunky violet accent, shared with skills-landscape.html) */
+:root {
+  --color-paper: oklch(98.5% 0.004 250); --color-paper-2: oklch(96.4% 0.006 252); --color-paper-glass: oklch(98.5% 0.004 250 / 0.88);
+  --color-ink: oklch(24% 0.02 258); --color-ink-2: oklch(34% 0.018 257); --color-muted: oklch(49% 0.016 257);
+  --color-rule: oklch(91% 0.008 255); --color-rule-2: oklch(84% 0.01 255);
+  --color-accent: oklch(55% 0.21 284); --color-accent-soft: oklch(95.5% 0.025 284); --color-accent-ink: oklch(98.5% 0.004 250);
+  --color-ok: oklch(56% 0.13 155); --color-warn: oklch(66% 0.15 75); --color-bad: oklch(56% 0.18 25);
+  --color-graphite: oklch(22% 0.016 260); --color-graphite-ink: oklch(92% 0.006 255); --color-graphite-muted: oklch(70% 0.012 256);
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif; --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem; --text-xl: 1.375rem; --text-3xl: clamp(1.75rem, 2vw + 1rem, 2.5rem); --text-display: clamp(2rem, 3.6vw + 1rem, 3.5rem);
+  --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 32px; --space-2xl: 48px; --space-3xl: 64px;
+  --radius-xs: 4px; --radius-sm: 6px; --radius-md: 10px; --dur-short: 150ms;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --color-paper: oklch(17% 0.012 258); --color-paper-2: oklch(21% 0.014 258); --color-paper-glass: oklch(17% 0.012 258 / 0.88); --color-ink: oklch(93% 0.006 255); --color-ink-2: oklch(84% 0.008 255); --color-muted: oklch(66% 0.012 256); --color-rule: oklch(28% 0.012 258); --color-rule-2: oklch(36% 0.014 258); --color-accent: oklch(72% 0.17 284); --color-accent-soft: oklch(26% 0.05 284); --color-accent-ink: oklch(17% 0.012 258); --color-ok: oklch(72% 0.13 155); --color-warn: oklch(78% 0.14 75); --color-bad: oklch(70% 0.17 25); --color-graphite: oklch(12% 0.012 260); }
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body { margin: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); font-size: var(--text-base); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: var(--color-accent); text-decoration: none; } a:hover { text-decoration: underline; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; border-radius: var(--radius-xs); }
+h1, h2, h3, h4 { font-family: var(--font-display); font-style: normal; letter-spacing: -0.01em; line-height: 1.15; margin: 0; overflow-wrap: anywhere; min-width: 0; }
+h1 { font-size: var(--text-display); font-weight: 600; } h2 { font-size: var(--text-3xl); font-weight: 600; } h3 { font-size: var(--text-xl); font-weight: 600; } h4 { font-size: var(--text-lg); font-weight: 600; }
+p { margin: 0 0 var(--space-md); color: var(--color-ink-2); max-width: 68ch; }
+ul, ol { margin: 0 0 var(--space-md); padding-left: 1.25rem; color: var(--color-ink-2); max-width: 70ch; } li { margin: var(--space-2xs) 0; } li::marker { color: var(--color-muted); }
+strong { color: var(--color-ink); font-weight: 600; }
+code { font-family: var(--font-mono); font-size: 0.86em; background: var(--color-paper-2); border: 1px solid var(--color-rule); padding: 0.05em 0.35em; border-radius: var(--radius-xs); }
+pre { font-family: var(--font-mono); font-size: var(--text-sm); line-height: 1.5; background: var(--color-graphite); color: var(--color-graphite-ink); padding: var(--space-md) var(--space-lg); border-radius: var(--radius-md); overflow-x: auto; margin: 0 0 var(--space-md); }
+pre code { background: none; border: 0; padding: 0; color: inherit; font-size: inherit; }
+.eyebrow { font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-muted); } .eyebrow.accent { color: var(--color-accent); }
+.muted { color: var(--color-muted); } .small { font-size: var(--text-sm); }
+
+.nav { position: sticky; top: 0; z-index: 30; background: var(--color-paper-glass); backdrop-filter: blur(8px); border-bottom: 1px solid var(--color-rule); }
+.nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 var(--space-lg); height: 56px; display: flex; align-items: center; gap: var(--space-lg); }
+.wordmark { font-family: var(--font-display); font-weight: 600; color: var(--color-ink); white-space: nowrap; } .wordmark span { color: var(--color-accent); }
+.nav-links { display: flex; gap: var(--space-md); overflow-x: auto; scrollbar-width: none; flex: 1; } .nav-links::-webkit-scrollbar { display: none; }
+.nav-links a { font-size: var(--text-sm); color: var(--color-ink-2); white-space: nowrap; padding: 6px 2px; border-bottom: 2px solid transparent; } .nav-links a:hover { text-decoration: none; color: var(--color-ink); } .nav-links a.is-active { color: var(--color-ink); border-bottom-color: var(--color-accent); }
+
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 var(--space-lg); }
+section { padding: var(--space-3xl) 0; border-top: 1px solid var(--color-rule); } section.hero { border-top: 0; padding-bottom: var(--space-2xl); }
+.sec-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--space-xl); margin-bottom: var(--space-xl); } .sec-head p { margin-top: var(--space-xs); }
+@media (max-width: 768px) { .sec-head { grid-template-columns: minmax(0, 1fr); gap: var(--space-sm); } }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--space-2xl); align-items: start; } @media (max-width: 768px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
+.hero h1 { margin: var(--space-sm) 0 var(--space-md); } .lede { font-size: var(--text-lg); color: var(--color-ink-2); }
+.hero-side { border-left: 1px solid var(--color-rule-2); padding-left: var(--space-lg); } .hero-side dl { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-xs) var(--space-md); font-size: var(--text-sm); }
+.hero-side dt { color: var(--color-muted); font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: 0.06em; padding-top: 3px; } .hero-side dd { margin: 0; color: var(--color-ink-2); }
+
+/* anatomy flow */
+.flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-sm); align-items: stretch; margin-bottom: var(--space-lg); }
+@media (max-width: 768px) { .flow { grid-template-columns: minmax(0, 1fr); } }
+.node { border: 1px solid var(--color-rule-2); border-radius: var(--radius-md); padding: var(--space-sm) var(--space-md); min-width: 0; position: relative; }
+.node .n { font-family: var(--font-mono); font-size: var(--text-2xs); color: var(--color-accent); letter-spacing: .06em; display: block; margin-bottom: 4px; }
+.node h4 { font-size: var(--text-base); margin-bottom: 4px; } .node p { font-size: var(--text-sm); margin: 0; }
+.node.arm { border-style: dashed; }
+
+/* matrix */
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); margin: 0 0 var(--space-md); }
+th, td { text-align: left; vertical-align: top; padding: var(--space-xs) var(--space-sm); border-bottom: 1px solid var(--color-rule); color: var(--color-ink-2); }
+th { font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-muted); font-weight: 500; }
+td:first-child { color: var(--color-ink); font-weight: 500; white-space: nowrap; }
+td.yes { color: var(--color-ok); } td.no { color: var(--color-bad); } td.part { color: var(--color-warn); }
+tr.is-dim td { opacity: .35; }
+.weights { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-xs) var(--space-lg); margin-bottom: var(--space-lg); }
+.weight { display: grid; grid-template-columns: minmax(0, 1fr) 90px; gap: var(--space-sm); align-items: center; font-size: var(--text-sm); color: var(--color-ink-2); }
+.weight input { width: 100%; accent-color: var(--color-accent); }
+.rank { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--space-xs); margin-bottom: var(--space-md); }
+@media (max-width: 768px) { .rank { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.rank > div { border: 1px solid var(--color-rule); border-radius: var(--radius-sm); padding: var(--space-xs) var(--space-sm); min-width: 0; }
+.rank b { font-family: var(--font-display); display: block; font-size: var(--text-base); color: var(--color-ink); }
+.rank span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); }
+.rank > div.is-top { border-color: var(--color-accent); background: var(--color-accent-soft); }
+.bar { height: 4px; background: var(--color-rule); border-radius: 2px; margin-top: 6px; overflow: hidden; } .bar i { display: block; height: 100%; background: var(--color-accent); transition: width 250ms; }
+
+/* option cards */
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--color-rule); margin-bottom: var(--space-lg); overflow-x: auto; scrollbar-width: none; } .tabs::-webkit-scrollbar { display: none; }
+.tab { font-family: var(--font-body); font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); background: none; border: 0; border-bottom: 2px solid transparent; padding: 10px 14px; margin-bottom: -1px; cursor: pointer; white-space: nowrap; transition: color var(--dur-short), border-color var(--dur-short); }
+.tab:hover { color: var(--color-ink); } .tab:active { color: var(--color-ink-2); } .tab[aria-selected="true"] { color: var(--color-ink); border-bottom-color: var(--color-accent); }
+[role="tabpanel"][hidden] { display: none; }
+.opt { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--space-xl); } @media (max-width: 768px) { .opt { grid-template-columns: minmax(0, 1fr); } }
+.opt h3 { margin-bottom: var(--space-xs); }
+.rows { border-top: 1px solid var(--color-rule); }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--space-xs) var(--space-lg); padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-rule); }
+.row > :first-child { font-weight: 500; color: var(--color-ink); font-size: var(--text-sm); } .row > :last-child { font-size: var(--text-sm); color: var(--color-ink-2); }
+.row ul { margin: 0; font-size: var(--text-sm); }
+.steps { counter-reset: s; list-style: none; padding: 0; margin: 0 0 var(--space-md); }
+.steps li { position: relative; padding-left: 36px; margin: var(--space-xs) 0; font-size: var(--text-sm); }
+.steps li::before { counter-increment: s; content: counter(s, decimal-leading-zero); position: absolute; left: 0; top: 2px; font-family: var(--font-mono); font-size: var(--text-2xs); color: var(--color-accent); letter-spacing: .06em; }
+.tag { display: inline-block; font-family: var(--font-mono); font-size: var(--text-2xs); letter-spacing: .04em; text-transform: uppercase; padding: 2px 7px; border: 1px solid var(--color-rule-2); border-radius: var(--radius-xs); color: var(--color-muted); margin: 0 4px 4px 0; white-space: nowrap; }
+.tag.ok { color: var(--color-ok); border-color: var(--color-ok); } .tag.warn { color: var(--color-warn); border-color: var(--color-warn); } .tag.bad { color: var(--color-bad); border-color: var(--color-bad); }
+
+.band { background: var(--color-graphite); color: var(--color-graphite-ink); border-top: 0; } .band h2, .band h4, .band strong { color: var(--color-graphite-ink); } .band p, .band li { color: var(--color-graphite-muted); } .band .eyebrow.accent { color: oklch(78% 0.14 284); }
+.band .rules { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-md); } @media (max-width: 768px) { .band .rules { grid-template-columns: minmax(0, 1fr); } }
+.band .rules div { border: 1px solid oklch(32% 0.016 260); border-radius: var(--radius-md); padding: var(--space-md) var(--space-lg); min-width: 0; } .band .rules h4 { font-size: var(--text-base); margin-bottom: var(--space-xs); } .band .rules p { font-size: var(--text-sm); margin: 0; }
+footer { padding: var(--space-xl) 0 var(--space-3xl); border-top: 1px solid var(--color-rule); font-size: var(--text-sm); color: var(--color-muted); }
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Sections"><div class="nav-inner"><span class="wordmark">dunky<span>/</span>skills</span><div class="nav-links" id="navlinks"><a href="#anatomy">Anatomy</a><a href="#matrix">Matrix</a><a href="#options">Options</a><a href="#rules">Rules</a><a href="#pick">Pick</a></div></div></nav>
+<main>
+
+<section class="hero"><div class="wrap hero-grid">
+  <div>
+    <span class="eyebrow accent">Research brief · 2026-10-19</span>
+    <h1>Six ways to vibe-test a skill.</h1>
+    <p class="lede">Every option answers the same question: given a prompt, does the agent behave better with the skill installed than without it? They differ in who runs the loop, what can be checked, and what you install. Names withheld on purpose. Judge the mechanism.</p>
+    <p class="small muted">Facts from the tools' own docs and repos, fetched 2026-10-19. Maturity is described, not counted. Nothing here is our own measurement.</p>
+  </div>
+  <aside class="hero-side" aria-label="At a glance"><dl>
+    <dt>Same for all</dt><dd>A scenario is a prompt, two or more conditions, and a grader. Baseline must fail, skill must pass.</dd>
+    <dt>Differs</dt><dd>Who orchestrates: an agent, a config runner, a binary, a harness, or your shell.</dd>
+    <dt>Hard part</dt><dd>Proving the skill actually fired. Only options that see the tool trace can.</dd>
+    <dt>Your constraints</dt><dd>No node toolchain. More than one harness. Markdown and sh.</dd>
+  </dl></aside>
+</div></section>
+
+<section id="anatomy"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">01 · Anatomy</span><h2>What every option runs</h2></div><p>Strip the tooling and the shape is identical. Five nodes. The options only change who owns each node and how much of it is code.</p></div>
+  <div class="flow">
+    <div class="node"><span class="n">01</span><h4>Scenario</h4><p>A naive prompt that describes the outcome, never the solution. A fixture repo to run in. The skills to install.</p></div>
+    <div class="node arm"><span class="n">02</span><h4>Conditions</h4><p>Baseline: no skill. Treatment: skill installed. Optional: second harness, second model.</p></div>
+    <div class="node"><span class="n">03</span><h4>Isolated runs</h4><p>One fresh agent per prompt × condition. Fresh temp dir, no inherited memory. Same prompts in every arm.</p></div>
+    <div class="node"><span class="n">04</span><h4>Graders</h4><p>Scripted checks for anything objective: file named, line cited, tool called. A separate judge for the fuzzy part.</p></div>
+    <div class="node"><span class="n">05</span><h4>Report</h4><p>A table: scenario × condition. Delta between arms. Stored JSON if you want trends. Exit code for CI.</p></div>
+  </div>
+  <p class="small">The honest-delta rule: a check that can only pass with the skill, like "the skill fired", must not count against the baseline. Otherwise the delta is inflated by construction.</p>
+</div></section>
+
+<section id="matrix"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">02 · Matrix</span><h2>Side by side</h2></div><p>Move the sliders to weight what matters to you. The ranking recomputes. Rows dim when an option fails a criterion you set to maximum.</p></div>
+  <div class="weights" id="weights"></div>
+  <div class="rank" id="rank"></div>
+  <div class="table-scroll"><table id="matrix-table"><thead><tr id="matrix-head"></tr></thead><tbody id="matrix-body"></tbody></table></div>
+  <p class="small muted">Yes, partial, and no are read from each tool's own documentation. Partial means it works with a wrapper you write.</p>
+</div></section>
+
+<section id="options"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">03 · Options</span><h2>One at a time</h2></div><p>How a scenario actually runs under each option, what you write, what you get, and where it breaks.</p></div>
+  <div class="tabs" role="tablist" id="opt-tabs"></div>
+  <div id="opt-panels"></div>
+</div></section>
+
+<section id="rules" class="band"><div class="wrap">
+  <span class="eyebrow accent">04 · Rules that hold everywhere</span>
+  <h2 style="margin:8px 0 24px">Borrowed from the people who run this nightly</h2>
+  <div class="rules">
+    <div><h4>Same prompts, always</h4><p>Sample the battery once. Every condition sees the identical prompts. Five to fifteen prompts: easy, differentiating, edge, coverage-gap.</p></div>
+    <div><h4>Isolation or nothing</h4><p>One agent per prompt × condition, spawned fresh. Contamination signs: zero hallucinations, near-identical scores across arms, uniform confidence, one agent doing several arms in sequence.</p></div>
+    <div><h4>Never self-judge</h4><p>Runners self-report approach and doubts. A separate judge sees all arms side by side and scores on one scale. Judge is never the model under test.</p></div>
+    <div><h4>Script the objective</h4><p>If a check can be a regex or a file test, it is. The judge is reserved for what cannot be scripted. Deterministic checks are free and never flaky.</p></div>
+    <div><h4>Patterns, not nights</h4><p>Act on a failure that repeats across runs. Fixing one bad night overfits. Store JSON per run if you intend to compare.</p></div>
+    <div><h4>Trigger is its own test</h4><p>Whether the skill fires depends on the description alone. Test it separately with should-fire and should-not-fire prompts, before testing what the body does.</p></div>
+  </div>
+</div></section>
+
+<section id="pick"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">05 · Pick</span><h2>What the matrix says for this repo</h2></div><p>With your constraints at maximum, no node, more than one harness, markdown and sh, two options survive and they are not exclusive.</p></div>
+  <div class="opt">
+    <div>
+      <div class="rows">
+        <div class="row"><div>Day to day</div><div>Option 1. The harness is a skill in this repo. Zero install. Same shape as the skills it tests. Costs agent time per run, so it runs on demand, not per commit.</div></div>
+        <div class="row"><div>When you want a file</div><div>Option 3. A single binary that runs a shell command per condition, grades stdout with scripts and a rubric, keeps a baseline, caches judge calls for offline CI. Young project, one maintainer.</div></div>
+        <div class="row"><div>Shared by both</div><div>The scenario folder. Prompt, conditions, checks script, rubric. Write it once and either runner reads it. Switching costs one config file.</div></div>
+        <div class="row"><div>Not now</div><div>Option 4 ties you to one harness. Option 5 brings back the node layer. Option 6 is only for an agent built on that framework.</div></div>
+      </div>
+    </div>
+    <div>
+<pre><code>tests/
+  check.sh                 static: frontmatter, names, length
+  scenarios/
+    judge-finds-spec-drift/
+      prompt.md            the naive prompt
+      conditions.md        baseline, skill, codex
+      checks.sh            file named? line cited? skill fired?
+      rubric.md            for the judge
+  fixtures/mini-repo/
+  results/                 one JSON per run, optional</code></pre>
+    </div>
+  </div>
+</div></section>
+
+</main>
+<footer><div class="wrap">Compiled 2026-10-19 from each tool's documentation and repository. Option names withheld on purpose. No metric here is our own measurement.</div></footer>
+
+<script>
+(function () {
+  'use strict';
+  var criteria = [
+    { id: 'nonode', label: 'No node toolchain', hint: 'nothing to install beyond what you have' },
+    { id: 'multi', label: 'More than one harness', hint: 'claude and codex in one run' },
+    { id: 'trigger', label: 'Proves the skill fired', hint: 'reads the tool trace' },
+    { id: 'det', label: 'Deterministic graders', hint: 'regex, file, tool-call checks' },
+    { id: 'ab', label: 'With / without built in', hint: 'both arms, delta in the report' },
+    { id: 'cache', label: 'Offline cache for CI', hint: 'replays judge calls' },
+    { id: 'mature', label: 'Mature, maintained', hint: 'wide use, active commits' },
+    { id: 'code', label: 'Little code to own', hint: 'what you must maintain' }
+  ];
+  // 2 = yes, 1 = partial, 0 = no
+  var options = [
+    { id: 1, name: 'Option 1', sub: 'An agent runs the harness', vals: { nonode: 2, multi: 2, trigger: 2, det: 1, ab: 2, cache: 0, mature: 1, code: 1 },
+      how: 'The test runner is itself a skill. You invoke it, it interviews you for the four ingredients, spawns one isolated sub-agent per prompt × condition, runs your checks script on each output, hands all arms to a separate judge, and writes a table plus a JSON per run. A second agent can read failures nightly and open fixes.',
+      write: ['A playbook skill: intake, spawn, check, judge, report', 'Per scenario: prompt, conditions, checks.sh, rubric', 'Nothing else. No runner code'],
+      get: ['Side-by-side table per prompt, delta per condition', 'Stored JSON if you keep it', 'A self-healing loop if you schedule it'],
+      breaks: ['Orchestration is non-deterministic. The runner can drift like any agent', 'Costs agent time for runs and the judge, so not per commit', 'Isolation is a rule the orchestrator must obey, not a sandbox the tool enforces'],
+      fit: 'Matches a repo that is markdown and sh. The harness has the same shape as the thing it tests.' },
+    { id: 2, name: 'Option 2', sub: 'A config runner with shell targets', vals: { nonode: 0, multi: 2, trigger: 1, det: 2, ab: 2, cache: 2, mature: 2, code: 1 },
+      how: 'One YAML file lists prompts, providers, and tests. A provider can be any shell command: it receives the prompt as an argument and whatever it prints is the answer. You write a tiny wrapper that copies the fixture, installs the skills for the treatment arm, and runs the agent CLI. Two providers, baseline and skill, give you both arms in one row.',
+      write: ['promptfile config, one per repo', 'A wrapper script per harness and arm, about 15 lines', 'Assertions per test: contains, regex, javascript, llm-rubric'],
+      get: ['CLI table, local web viewer, JSON, HTML, JUnit', 'Non-zero exit on failed tests, pass-rate threshold', 'Judge calls cached between runs'],
+      breaks: ['Runs through npx. No files in the repo, but node must exist on the machine', 'Sees only stdout. Proving the skill fired needs the wrapper to emit JSON and a custom assertion to read the tool list', 'Now owned by a large model vendor'],
+      fit: 'The safe pick if node on the machine is acceptable. Mature, documented, widely used.' },
+    { id: 3, name: 'Option 3', sub: 'A single binary built for CLI targets', vals: { nonode: 2, multi: 2, trigger: 1, det: 2, ab: 2, cache: 2, mature: 0, code: 1 },
+      how: 'Install one binary. Cases are JSONL. A target can be a shell command, an HTTP endpoint, or a model API. Scorers include contains, regex, json-schema, similarity, and a rubric judge; custom scorers are any subprocess speaking JSON. A matrix flag runs the same cases across targets, a baseline flag compares to a saved run, and a cache replays judge calls so CI runs offline.',
+      write: ['One YAML config, one JSONL of cases', 'The same wrapper script as option 2', 'Custom scorer scripts only if you need them'],
+      get: ['Terminal, JSON, JUnit, HTML', 'Baseline diff, matrix across targets', 'Exit 0 or 1, cost budget flag'],
+      breaks: ['Young project, one maintainer, a quiet summer', 'Proving the skill fired still needs the wrapper to emit the trace', 'Smaller community means you debug it yourself'],
+      fit: 'Does exactly the job with nothing to install but one binary. The risk is the project, not the design.' },
+    { id: 4, name: 'Option 4', sub: 'The harness vendor’s own eval command', vals: { nonode: 2, multi: 0, trigger: 2, det: 2, ab: 2, cache: 0, mature: 1, code: 2 },
+      how: 'The agent CLI ships an eval subcommand. Cases are markdown with frontmatter and grader files. It runs each case in a fresh temp home with only the plugin under test loaded, once with and once without, grades with regex, tool-used, tool-order, file-exists, and a judge voting two of three, and prints WITH, WITHOUT, delta.',
+      write: ['A one-field manifest so the directory counts as a plugin', 'Per case: prompt.md and graders/*.md', 'Nothing else'],
+      get: ['Native delta, HTML report, JSON for gating', 'Deterministic trigger check, free', 'Threshold, cost ceiling, concurrency flags'],
+      breaks: ['One harness only. Nothing runs under a second agent', 'Early access. Can be switched off server-side', 'Grader types are fixed. No custom scripts'],
+      fit: 'Best trigger check of all six, and zero code. Rejected for this repo because it tests one harness.' },
+    { id: 5, name: 'Option 5', sub: 'Code evals in a test runner', vals: { nonode: 0, multi: 2, trigger: 1, det: 2, ab: 2, cache: 0, mature: 1, code: 0 },
+      how: 'Eval files in TypeScript. Each defines data, a task function, and scorers. The task is any async function, so it can shell out to an agent CLI. A variant helper runs the same data under several task configurations, which is the with / without shape. A local UI shows runs, a threshold flag fails CI.',
+      write: ['A TypeScript project: config, eval files, scorers', 'The CLI call inside the task function', 'Scorers as functions, judge via a model SDK'],
+      get: ['Watch mode UI, static HTML export, JSON', 'Threshold exit code', 'Traces per run'],
+      breaks: ['Brings back the node toolchain you removed', 'Months without commits on the one that fits best', 'No exec provider. You write the subprocess code'],
+      fit: 'Right if the repo were TypeScript. It is not.' },
+    { id: 6, name: 'Option 6', sub: 'An agent framework’s eval API', vals: { nonode: 0, multi: 0, trigger: 2, det: 2, ab: 1, cache: 0, mature: 1, code: 0 },
+      how: 'A full agent framework with evals built in. Tests drive an agent over HTTP against a local dev server: send a message, assert a tool was called or a skill was loaded, run a judge, gate or soft-score. Skills in the standard format load unchanged.',
+      write: ['An agent project in that framework', 'Eval files per case', 'A config for judge and reporters'],
+      get: ['Skill-loaded assertion, tool-call assertions, gates vs soft scores', 'JUnit and hosted reporters', 'Exit 0 only when gates pass'],
+      breaks: ['Tests the skill inside that framework’s agent, not inside your harness', 'A TypeScript project plus an agent you do not otherwise need', 'Public preview'],
+      fit: 'Only if a dunky project ships an agent on that framework. Then the skills drop in and this becomes the right runner for that agent.' }
+  ];
+  var yn = ['no', 'partial', 'yes'];
+  var weights = {}; criteria.forEach(function (c) { weights[c.id] = c.id === 'nonode' || c.id === 'multi' ? 3 : 2; });
+  var store = { get: function (k, d) { try { var v = localStorage.getItem('dunky-vibe:' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }, set: function (k, v) { try { localStorage.setItem('dunky-vibe:' + k, JSON.stringify(v)); } catch (e) {} } };
+  weights = store.get('weights', weights);
+
+  var wEl = document.getElementById('weights');
+  criteria.forEach(function (c) {
+    var w = document.createElement('label'); w.className = 'weight';
+    w.innerHTML = '<span>' + c.label + ' <span class="muted small">· ' + c.hint + '</span></span><input type="range" min="0" max="3" step="1" value="' + weights[c.id] + '" aria-label="Weight for ' + c.label + '">';
+    w.querySelector('input').addEventListener('input', function () { weights[c.id] = +this.value; store.set('weights', weights); render(); });
+    wEl.appendChild(w);
+  });
+  var head = document.getElementById('matrix-head');
+  head.innerHTML = '<th>Option</th>' + criteria.map(function (c) { return '<th>' + c.label + '</th>'; }).join('') + '<th>Score</th>';
+
+  function score(o) { var s = 0, max = 0; criteria.forEach(function (c) { s += o.vals[c.id] * weights[c.id]; max += 2 * weights[c.id]; }); return max ? s / max : 0; }
+  function hardFail(o) { return criteria.some(function (c) { return weights[c.id] === 3 && o.vals[c.id] === 0; }); }
+  function render() {
+    var ranked = options.slice().sort(function (a, b) { return score(b) - score(a); });
+    var body = document.getElementById('matrix-body'); body.innerHTML = '';
+    ranked.forEach(function (o) {
+      var tr = document.createElement('tr'); if (hardFail(o)) tr.className = 'is-dim';
+      tr.innerHTML = '<td>' + o.name + '<br><span class="muted" style="font-weight:400">' + o.sub + '</span></td>' + criteria.map(function (c) { var v = o.vals[c.id]; return '<td class="' + (v === 2 ? 'yes' : v === 1 ? 'part' : 'no') + '">' + yn[v] + '</td>'; }).join('') + '<td>' + Math.round(score(o) * 100) + '</td>';
+      body.appendChild(tr);
+    });
+    var rank = document.getElementById('rank'); rank.innerHTML = '';
+    ranked.forEach(function (o, i) {
+      var d = document.createElement('div'); if (i === 0 && !hardFail(o)) d.className = 'is-top';
+      d.innerHTML = '<b>' + o.name + '</b><span>' + (hardFail(o) ? 'fails a must' : Math.round(score(o) * 100) + ' / 100') + '</span><div class="bar"><i style="width:' + Math.round(score(o) * 100) + '%"></i></div>';
+      rank.appendChild(d);
+    });
+  }
+  render();
+
+  var tabs = document.getElementById('opt-tabs'), panels = document.getElementById('opt-panels');
+  options.forEach(function (o, i) {
+    var t = document.createElement('button'); t.className = 'tab'; t.setAttribute('role', 'tab'); t.id = 't' + o.id; t.setAttribute('aria-controls', 'p' + o.id); t.setAttribute('aria-selected', i === 0); t.tabIndex = i === 0 ? 0 : -1; t.textContent = o.name; tabs.appendChild(t);
+    var p = document.createElement('div'); p.setAttribute('role', 'tabpanel'); p.id = 'p' + o.id; p.setAttribute('aria-labelledby', 't' + o.id); if (i) p.hidden = true;
+    p.innerHTML = '<div class="opt"><div><h3>' + o.name + ' <span class="muted" style="font-weight:500">· ' + o.sub + '</span></h3><p>' + o.how + '</p>' +
+      '<div class="rows"><div class="row"><div>You write</div><div><ul>' + o.write.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></div></div>' +
+      '<div class="row"><div>You get</div><div><ul>' + o.get.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></div></div>' +
+      '<div class="row"><div>Where it breaks</div><div><ul>' + o.breaks.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></div></div>' +
+      '<div class="row"><div>Fit for this repo</div><div>' + o.fit + '</div></div></div></div>' +
+      '<div><span class="eyebrow">Criteria</span><p class="small" style="margin-top:8px">' + criteria.map(function (c) { var v = o.vals[c.id]; return '<span class="tag ' + (v === 2 ? 'ok' : v === 1 ? 'warn' : 'bad') + '">' + c.label + ': ' + yn[v] + '</span>'; }).join('') + '</p>' +
+      '<span class="eyebrow">A scenario run</span><ol class="steps">' + runSteps(o.id) + '</ol></div></div>';
+    panels.appendChild(p);
+  });
+  function runSteps(id) {
+    var s = {
+      1: ['You call the test skill with a scenario folder', 'It reads prompt, conditions, checks, rubric', 'Spawns one sub-agent per prompt × condition, fresh temp dir each', 'Runs checks.sh on every output', 'Judge sees all arms, scores on one scale', 'Table plus results JSON'],
+      2: ['npx runs the config', 'For each test × provider, the wrapper copies the fixture, installs skills for the skill arm, runs the agent CLI', 'stdout is the answer', 'Assertions run: deterministic first, rubric last', 'Table, viewer, JSON; exit code'],
+      3: ['One binary reads config and JSONL cases', 'Matrix: same cases across baseline and skill targets via the wrapper', 'Scorers: regex, schema, subprocess, rubric', 'Compare to saved baseline', 'Terminal, JUnit, HTML; exit 0 or 1'],
+      4: ['The harness reads prompt.md and graders', 'Fresh temp home, plugin loaded in one arm only', 'N runs per arm', 'Deterministic graders free, judge votes 2 of 3', 'WITH, WITHOUT, delta; HTML and JSON'],
+      5: ['Test runner loads *.eval.ts', 'Task function shells out to the agent CLI per variant', 'Scorer functions grade, judge via SDK', 'Threshold decides exit', 'UI, static export, JSON'],
+      6: ['Dev server boots the agent with your skills', 'Eval sends a message over HTTP', 'Assert tool called, skill loaded, judge', 'Gates fail, soft scores report', 'JUnit, hosted reporters']
+    }[id];
+    return s.map(function (x) { return '<li>' + x + '</li>'; }).join('');
+  }
+  var tabEls = Array.prototype.slice.call(tabs.querySelectorAll('[role="tab"]'));
+  function select(tab) { tabEls.forEach(function (t) { var on = t === tab; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; document.getElementById(t.getAttribute('aria-controls')).hidden = !on; }); tab.focus(); }
+  tabEls.forEach(function (t, i) { t.addEventListener('click', function () { select(t); }); t.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') select(tabEls[(i + 1) % tabEls.length]); if (e.key === 'ArrowLeft') select(tabEls[(i - 1 + tabEls.length) % tabEls.length]); }); });
+
+  var links = Array.prototype.slice.call(document.querySelectorAll('#navlinks a'));
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting) links.forEach(function (a) { a.classList.toggle('is-active', a.getAttribute('href') === '#' + e.target.id); }); }); }, { rootMargin: '-40% 0px -55% 0px' });
+    links.forEach(function (a) { var s = document.querySelector(a.getAttribute('href')); if (s) io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

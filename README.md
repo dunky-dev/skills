@@ -5,25 +5,60 @@
   </picture>
 </p>
 
-# dunky-dev template repo
+# dunky-dev skills
 
-A pnpm-workspace monorepo starter with the shared dunky-dev tooling baked in.
-Use it as a GitHub **template repository** (_Use this template_) or copy it with
-`npx degit dunky-dev/template-repo my-new-repo`.
+Agent skills for the dunky repos. Six skills that staff the
+`EXPLORE -> SPEC -> TEST -> IMPLEMENT -> RECONCILE` flow, and the standards
+they equip. EXPLORE is the entry, where an idea exists but the questions do
+not yet; the four states after it are the loop every dunky repo already
+runs. Plain markdown in the [Agent Skills](https://agentskills.io) format, so
+they install into Claude Code, Codex, Cursor, OpenCode, and the rest.
 
-## What's included
+## Install
 
-| Tool            | File                            | Purpose                                                                                  |
-| --------------- | ------------------------------- | ---------------------------------------------------------------------------------------- |
-| **oxlint**      | `.oxlintrc.json`                | Linting (eslint/import/react/unicorn/vitest plugins).                                    |
-| **oxfmt**       | `.oxfmtrc.json`                 | Formatting — house style: no semicolons, single quotes, width 100, kebab-case filenames. |
-| **lint-staged** | `.lintstagedrc.json`            | Runs `oxlint --fix` + `oxfmt` on staged `*.{ts,tsx}`.                                    |
-| **husky**       | `.husky/pre-commit`             | Runs lint-staged before each commit. Installed via the `prepare` script.                 |
-| **knip**        | `knip.config.ts`                | Unused-export/dependency detection (minimal config — extend per package).                |
-| **TypeScript**  | `tsconfig.json`                 | Strict, ESM, bundler resolution. One `@dunky-dev/core` path alias.                       |
-| **Vitest**      | `vitest.config.ts`              | Node test environment.                                                                   |
-| **pnpm**        | `.npmrc`, `pnpm-workspace.yaml` | Workspace tuning; packages live under `packages/**`.                                     |
-| **CI**          | `.github/workflows/ci.yml`      | Lint + typecheck + test on push/PR (Node 24, pnpm 11.10.0).                              |
+```bash
+npx skills add dunky-dev/skills
+```
+
+Pick the skills you want, or `--all`.
+
+## The set
+
+| Skill         | Call it when                                                         |
+| ------------- | -------------------------------------------------------------------- |
+| `scout`       | A repo or an area is new to you, or a request needs a map and devs   |
+| `dev`         | One task is clear and ready to build                                 |
+| `rubber-duck` | You or an agent are stuck on a thought, a choice, or a decision      |
+| `spike`       | A question that a quick run or a primary source would settle         |
+| `brawl`       | A finished change should face the review before the PR opens         |
+| `red-vs-blue` | One finding or PR comment needs settling: is it real, does it matter |
+
+You never have to type a command. Say "I need a scout",
+"deploy a dev", "rubber duck this", "spike it", "brawl this", or "is this
+comment real?". Each skill folder has a `README.md` with its reference,
+what it expects, and how to call it.
+
+## Standards
+
+`standards/` holds compact expert briefs, one specialty per file:
+accessibility, internationalization, security, the workflow, logic,
+intent, principles. Dev builds by the principles and the workflow; brawl
+equips the rest as lenses. Two shared rules, `finding.md` and
+`severity.md`, shape and score every finding. Standards hold knowledge, not
+procedure. Each has Core, Sources, Checks.
+
+## Testing the skills
+
+`vibe/` holds this repo's own scenarios: a naive prompt, a checklist, and
+the skills to install. They are run by the vibe-test skill, which lives in
+its own repo.
+
+## Website
+
+`website/` is the Astro docs site, served at `dunky.dev/skills`. See
+[`ARCHITECTURE.md`](./ARCHITECTURE.md) for the layout and the decisions,
+[`CONTRIBUTING.md`](./CONTRIBUTING.md) for the workflow, and `research/` for
+the reports behind the design.
 
 ## License
 

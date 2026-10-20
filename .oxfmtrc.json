@@ -8,5 +8,6 @@
   "useTabs": false,
   "semi": false,
   "singleQuote": true,
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "ignorePatterns": ["**/dist/**", "research/**", "vibe/fixtures/**", "website/public/logo/**"]
 }

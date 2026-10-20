@@ -1,0 +1,86 @@
+---
+title: Brawl
+description: The big-picture review, held before the PR opens.
+---
+
+import Compare from '../../../components/compare.astro'
+import Engine from '../../../components/engine.astro'
+
+On a team, every reviewer feeds the diff to their own agent with their own
+lens and their own context. Each comment starts a fight, and soon the PR is
+an arena for agents and the people behind them. Brawl holds that fight
+first. It reads the change the way those reviewers would, raises what they
+would raise, and sends each finding through its own red-vs-blue fight. Only
+what survives comes back.
+
+## The dunky way
+
+- **Fight before the PR.** The arena moves to your machine, before anyone
+  else spends time on the change.
+- **Lenses, not personas.** Intent and logic run every time. Any standard
+  joins as an extra lens: `--equip a11y,security`.
+- **The repo wins.** Brawl reads `AGENTS.md`, `ARCHITECTURE.md`, the touched
+  `SPEC.md`, and Scout's map. A finding the repo's rules make intended is
+  dismissed.
+- **When you ask.** Devs keep running and never stop to review. You call
+  the brawl on the changes where the stakes are worth it.
+
+## Where it clicks
+
+<Engine active='brawl' />
+
+Brawl reviews a change when you ask, before the PR opens. It hands back Act on, Consider, and Dismissed, with one verdict: Ship, Fix
+first, or Needs discussion.
+
+## With and without
+
+<Compare skill="brawl">
+<Fragment slot="prompt">
+
+I'm about to open this PR. Review it first so my teammates don't find
+anything new.
+
+PR text: "Trim names in greet. Leading and trailing whitespace is now
+removed, and a whitespace-only name returns 'Hello, stranger!', as
+SPEC.md says."
+
+```diff
+ export function greet(name: string): string {
+-  if (name === '') return 'Hello, stranger!'
+-  return `Hello, ${name}!`
++  const trimmed = name.trim()
++  if (name === '') return 'Hello, stranger!'
++  return `Hello, ${trimmed}!`
+ }
+```
+
+</Fragment>
+<Fragment slot="without">
+
+Looks good overall. The trimming is clean. Two small suggestions: consider
+renaming `trimmed` to `cleanName`, and add a JSDoc comment on `greet`.
+
+</Fragment>
+<Fragment slot="with">
+
+**The change claims** to trim names and greet whitespace-only names as
+strangers. **Lenses:** intent, logic.
+
+**Act on**
+
+- A whitespace-only name returns `Hello, !`, not `Hello, stranger!`. The
+  check at `src/greet.ts:3` still tests `name`, not `trimmed`. This breaks
+  the PR text's own promise. Survives, confidence 95, Important.
+
+**Consider:** none. **Dismissed:** 2, both naming preferences.
+
+**Verdict: Fix first.**
+
+</Fragment>
+</Compare>
+
+## Call it
+
+Say "brawl this", "brawl the PR", or "stress-test this diff". Or type
+`/brawl`, `/brawl <branch or PR>`, or `/brawl --equip a11y,security`. Read
+the [skill README](https://github.com/dunky-dev/skills/tree/main/skills/brawl).
